@@ -1,0 +1,172 @@
+import logging
+import sys
+import zipfile
+from abc import ABCMeta, abstractmethod
+from pathlib import Path
+from typing import Tuple
+
+import click
+import requests
+
+from mloader import __version__ as about
+from mloader.response_pb2 import Response
+
+log = logging.getLogger()
+
+
+def setup_logging():
+    handlers = [logging.StreamHandler(sys.stdout)]
+    logging.basicConfig(
+        handlers=handlers,
+        format=(
+            "{asctime:^} | {levelname: ^8} | "
+            "{filename: ^14} {lineno: <4} | {message}"
+        ),
+        style="{",
+        datefmt="%d.%m.%Y %H:%M:%S",
+        level=logging.INFO,
+    )
+
+
+class ExporterBase(metaclass=ABCMeta):
+    def __init__(self, destination: str, title: str, chapter: str):
+        self.destination = destination
+        self.title = title
+        self.chapter = chapter
+
+    def format_image_name(self, index: int, ext=".png") -> str:
+        return f"{self.title}-{index:0>3}.{ext}"
+
+    def close(self):
+        pass
+
+    @abstractmethod
+    def add_image(self, image_data: bytes, index: int):
+        pass
+
+
+class RawExporter(ExporterBase):
+    def __init__(self, destination: str, title: str, chapter: str):
+        super().__init__(destination, title, chapter)
+        self.path = Path(self.destination, title, chapter)
+        self.path.mkdir(parents=True, exist_ok=True)
+
+    def add_image(self, image_data: bytes, index: int):
+        filename = Path(self.format_image_name(index))
+        self.path.joinpath(filename).write_bytes(image_data)
+
+
+class CBZExporter(ExporterBase):
+    def __init__(
+        self,
+        destination: str,
+        title: str,
+        chapter: str,
+        compression=zipfile.ZIP_DEFLATED,
+    ):
+        super().__init__(destination, title, chapter)
+        self.path = Path(self.destination, title)
+        self.path.mkdir(parents=True, exist_ok=True)
+        self.path = self.path.joinpath(f"{title}-{chapter}").with_suffix(".cbz")
+        self.archive = zipfile.ZipFile(
+            self.path, mode="w", compression=compression
+        )
+
+    def add_image(self, image_data: bytes, index: int):
+        self.archive.writestr(self.format_image_name(index), image_data)
+
+    def close(self):
+        self.archive.close()
+
+
+class MangaLoader:
+    def __init__(self, chapter_id):
+        self.chapter_id = chapter_id
+        self.session = requests.session()
+        self.session.headers.update(
+            {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0"
+            }
+        )
+
+    def _decrypt_image(self, url: str, encryption_hex: str) -> bytearray:
+        resp = self.session.get(url)
+        data = bytearray(resp.content)
+        key = bytes.fromhex(encryption_hex)
+        a = len(key)
+        for s in range(len(data)):
+            data[s] ^= key[s % a]
+        return data
+
+    def _load_pages(self) -> Response:
+        url = "https://jumpg-webapi.tokyo-cdn.com/api/manga_viewer"
+        resp = self.session.get(
+            url,
+            params={
+                "chapter_id": self.chapter_id,
+                "split": "yes",
+                "img_quality": "high",
+            },
+        )
+        response_proto = Response()
+        return response_proto.FromString(resp.content)
+
+    def _format_filename(self, title, chapter):
+        return f"{title}-{chapter}"
+
+    def save(self, dst: str, exporter_cls: type = RawExporter):
+        response = self._load_pages()
+        viewer = response.success.mangaviewer
+        pages = [p.mangaPage for p in viewer.pages if p.mangaPage.image_url]
+        title = viewer.titleName
+        chapter_name = viewer.chapterName
+        exporter: ExporterBase = exporter_cls(dst, title, chapter_name)
+        log.info("Manga: %s", title)
+        log.info("Chapter: %s", chapter_name)
+        log.info("Found pages: %s", len(pages))
+        with click.progressbar(
+            pages, label=chapter_name, show_pos=True,
+        ) as pbar:
+            for i, page in enumerate(pbar, 1):
+                image_blob = self._decrypt_image(
+                    page.image_url, page.encryption_key
+                )
+                exporter.add_image(image_blob, i)
+
+        exporter.close()
+
+
+@click.command(short_help=about.__description__)
+@click.option(
+    "--out",
+    "-o",
+    "out_dir",
+    type=click.Path(exists=False, writable=True),
+    metavar="<directory>",
+    default="mangaplus_downloads",
+    show_default=True,
+    help="Save directory (not a file)",
+    envvar="MLOADER_EXTRACT_OUT_DIR",
+)
+@click.option(
+    "--raw",
+    "-r",
+    "raw",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="Save raw images",
+    envvar="MLOADER_RAW",
+)
+@click.argument("chapters", type=click.INT, nargs=-1)
+def main(out_dir: str, chapters: Tuple[int], raw: bool):
+    setup_logging()
+    log.info("Started export")
+
+    for chapter_id in chapters:
+        loader = MangaLoader(chapter_id)
+        try:
+            loader.save(out_dir, RawExporter if raw else CBZExporter)
+        except Exception:
+            log.exception("Failed to save images")
+    log.info("SUCCESS")

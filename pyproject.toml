@@ -1,0 +1,3 @@
+[tool.black]
+target_version = ['py35']
+line-length = 80

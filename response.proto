@@ -1,0 +1,167 @@
+syntax = "proto3";
+
+package manga;
+
+message BannerList {
+
+    message Banner {
+        string image_url = 1;
+        TransitionAction action = 2;
+        uint32 id = 3;
+    }
+
+    string banner_title = 1;
+    repeated Banner banners = 2;
+}
+
+message TransitionAction {
+    int32 method = 1;
+    string url = 2;
+}
+
+// LastPage
+
+message Chapter {
+    uint32 titleid = 1;
+    uint32 chapterId = 2;
+    string name = 3;
+    string subTitle = 4;
+    string thumbnailUrl = 5;
+    uint32 startTimeStamp = 6;
+    uint32 endTimeStamp = 7;
+    bool alreadyViewed = 8;
+    bool isVerticalOnly = 9;
+}
+
+
+message Comment {
+    uint32 id = 1;
+    uint32 index = 2;
+    string userName = 3;
+    string iconUrl = 4;
+    bool isMyComment = 6;
+    bool alreadyLiked = 7;
+    uint32 numberOfLikes = 9;
+    string body = 10;
+    uint32 created = 11;
+}
+
+message AdNetworkList {
+    message AdNetwork {
+        message Facebook {
+            string placementID = 1;
+        }
+
+        message Admob {
+            string unitID = 1;
+        }
+        message Mopub {
+            string unitID = 1;
+        }
+        message Adsense {
+            string unitID = 1;
+        }
+        message Applovin {
+            string unitID = 1;
+        }
+
+        Facebook facebook = 1;
+        Admob admob = 2;
+        Mopub mopub = 3;
+        Adsense adsense = 4;
+        Applovin applovin = 5;
+    }
+
+    AdNetwork adNetworks = 1;
+}
+
+
+message Popup {
+    message Button {
+        string text = 1;
+        TransitionAction action = 2;
+    }
+
+    message OSDefault {
+        string subject = 1;
+        string body = 2;
+        Button okButton = 3;
+        Button neutralButton = 4;
+        Button cancelButton = 5;
+
+    }
+
+    message AppDefault {
+        string subject = 1;
+        string body = 2;
+        TransitionAction action = 3;
+        string imageUrl = 4;
+    }
+
+    message MovieReward {
+        string imageUrl = 1;
+        AdNetworkList advertisement = 2;
+    }
+
+    OSDefault osDefault = 1;
+    AppDefault appDefault = 2;
+    MovieReward movieReward = 3;
+}
+
+
+message LastPage {
+    Chapter currentChapter = 1;
+    Chapter nextChapter = 2;
+    repeated Comment topComments = 3;
+    bool isSubscribed = 4;
+    uint32 nextTimeStamp = 5;
+    int32 chapterType = 6;
+    AdNetworkList advertisement = 7;
+    Popup movieReward = 8;
+}
+
+// MangaPage
+message MangaPage {
+    string image_url = 1;
+    uint32 width = 2;
+    uint32 height = 3;
+    int32 type = 4;
+    string encryption_key = 5;
+}
+
+// Page
+message Page {
+    MangaPage mangaPage = 1;
+    BannerList bannerList = 2;
+    LastPage lastPage = 3;
+    AdNetworkList advertisement = 4;
+}
+
+// MangaViewer
+message MangaViewer {
+    message Sns {
+        string body = 1;
+        string url = 2;
+    }
+
+    repeated Page pages = 1;
+    uint32 chapterId = 2;
+    repeated Chapter chapters = 3;
+    Sns sns = 4;
+    string titleName = 5;
+    string chapterName = 6;
+    uint32 numberOfComments = 7;
+    bool isVerticalOnly = 8;
+    uint32 titleId = 9;
+    bool startFromRight = 10;
+}
+// SuccessResult
+message SuccessResult {
+    MangaViewer mangaviewer = 10;
+}
+
+//Response
+
+message Response {
+    SuccessResult success = 1;
+}
