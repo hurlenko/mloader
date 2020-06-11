@@ -1,9 +1,11 @@
 import logging
+import re
+import string
 import sys
 import zipfile
 from abc import ABCMeta, abstractmethod
 from pathlib import Path
-from typing import Tuple
+from typing import Tuple, Type
 
 import click
 import requests
@@ -31,11 +33,14 @@ def setup_logging():
 class ExporterBase(metaclass=ABCMeta):
     def __init__(self, destination: str, title: str, chapter: str):
         self.destination = destination
-        self.title = title
-        self.chapter = chapter
+        self.title = self.escape_path(title)
+        self.chapter = self.escape_path(chapter)
 
     def format_image_name(self, index: int, ext=".png") -> str:
         return f"{self.title}-{index:0>3}.{ext}"
+
+    def escape_path(self, path: str) -> str:
+        return re.sub(r"[^\w]+", " ", path).strip(string.punctuation + " ")
 
     def close(self):
         pass
@@ -48,7 +53,7 @@ class ExporterBase(metaclass=ABCMeta):
 class RawExporter(ExporterBase):
     def __init__(self, destination: str, title: str, chapter: str):
         super().__init__(destination, title, chapter)
-        self.path = Path(self.destination, title, chapter)
+        self.path = Path(self.destination, self.title, self.chapter)
         self.path.mkdir(parents=True, exist_ok=True)
 
     def add_image(self, image_data: bytes, index: int):
@@ -65,9 +70,11 @@ class CBZExporter(ExporterBase):
         compression=zipfile.ZIP_DEFLATED,
     ):
         super().__init__(destination, title, chapter)
-        self.path = Path(self.destination, title)
+        self.path = Path(self.destination, self.title)
         self.path.mkdir(parents=True, exist_ok=True)
-        self.path = self.path.joinpath(f"{title}-{chapter}").with_suffix(".cbz")
+        self.path = self.path.joinpath(
+            f"{self.title}-{self.chapter}"
+        ).with_suffix(".cbz")
         self.archive = zipfile.ZipFile(
             self.path, mode="w", compression=compression
         )
@@ -85,9 +92,11 @@ class MangaLoader:
         self.session = requests.session()
         self.session.headers.update(
             {
-                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:72.0) Gecko/20100101 Firefox/72.0"
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64; "
+                "rv:72.0) Gecko/20100101 Firefox/72.0"
             }
         )
+        self._api_url = "https://jumpg-webapi.tokyo-cdn.com/api/manga_viewer"
 
     def _decrypt_image(self, url: str, encryption_hex: str) -> bytearray:
         resp = self.session.get(url)
@@ -99,9 +108,8 @@ class MangaLoader:
         return data
 
     def _load_pages(self) -> Response:
-        url = "https://jumpg-webapi.tokyo-cdn.com/api/manga_viewer"
         resp = self.session.get(
-            url,
+            self._api_url,
             params={
                 "chapter_id": self.chapter_id,
                 "split": "yes",
@@ -114,7 +122,7 @@ class MangaLoader:
     def _format_filename(self, title, chapter):
         return f"{title}-{chapter}"
 
-    def save(self, dst: str, exporter_cls: type = RawExporter):
+    def save(self, dst: str, exporter_cls: Type[ExporterBase] = RawExporter):
         response = self._load_pages()
         viewer = response.success.mangaviewer
         pages = [p.mangaPage for p in viewer.pages if p.mangaPage.image_url]
@@ -134,6 +142,30 @@ class MangaLoader:
                 exporter.add_image(image_blob, i)
 
         exporter.close()
+
+
+def validate_chapters(ctx, param, value):
+    if not value:
+        return value
+    res = []
+    for item in value:
+        if "title" in value:
+            raise click.BadParameter(
+                f"Title downloads are not supported: {item}. "
+                f"Use chapter links - <site>/viewer/<chapter_id>"
+            )
+        match = re.search(r"viewer/(\d+)", item)
+        if match:
+            item = match.group(1)
+        try:
+            res.append(int(item))
+        except ValueError:
+            raise click.BadParameter(
+                "Chapter must be an integer or a link in format "
+                "<site>/viewer/<chapter_id>"
+            )
+
+    return res
 
 
 @click.command(short_help=about.__description__)
@@ -158,7 +190,7 @@ class MangaLoader:
     help="Save raw images",
     envvar="MLOADER_RAW",
 )
-@click.argument("chapters", type=click.INT, nargs=-1)
+@click.argument("chapters", nargs=-1, callback=validate_chapters)
 def main(out_dir: str, chapters: Tuple[int], raw: bool):
     setup_logging()
     log.info("Started export")
