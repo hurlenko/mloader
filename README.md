@@ -17,18 +17,18 @@
 The recommended installation method is using `pip`:
 
 ```bash
-pip install https://github.com/hurlenko/mloader/archive/master.zip
+pip install mloader
 ```
 
 After installation, the `mloader` command will be available. Check the [command line](%EF%B8%8F-command-line-interface) section for supported commands.
 
 ## 📙 Usage
 
-Get the id of the chapter you want to download from the url: mangaplus.shueisha.co.jp/viewer/**[chapter_id_here]**.
+Copy the url or the id of the chapter you want to download and pass it to `mloader`. Urls have form mangaplus.shueisha.co.jp/viewer/**[chapter_id_here]**.
 
-Note that title downloads (title id's have form `[website]/title/[title_id]`) are not supported but you can pass multiple chapter id's.
+Note that title downloads (title id's have form `[website]/title/[title_id]`) are not supported but you can pass multiple urls/chapter id's.
 
-Chapters can be saved as `CBZ` (default) archives or separate images by passing the `raw` parameter.
+Chapters can be saved as `CBZ` archives (default) or separate images by passing the `raw` parameter.
 
 ## 🖥️ Command line interface
 
