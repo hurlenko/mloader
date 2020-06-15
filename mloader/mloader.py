@@ -5,7 +5,7 @@ import sys
 import zipfile
 from abc import ABCMeta, abstractmethod
 from pathlib import Path
-from typing import Tuple, Type
+from typing import Tuple, Type, Union
 
 import click
 import requests
@@ -87,8 +87,8 @@ class CBZExporter(ExporterBase):
 
 
 class MangaLoader:
-    def __init__(self, chapter_id):
-        self.chapter_id = chapter_id
+    def __init__(self, exporter_cls: Type[ExporterBase] = RawExporter):
+        self.exporter_cls = exporter_cls
         self.session = requests.session()
         self.session.headers.update(
             {
@@ -107,13 +107,15 @@ class MangaLoader:
             data[s] ^= key[s % a]
         return data
 
-    def _load_pages(self) -> Response:
+    def _load_pages(
+        self, chapter_id: Union[str, int], quality: str, split: bool
+    ) -> Response:
         resp = self.session.get(
             self._api_url,
             params={
-                "chapter_id": self.chapter_id,
-                "split": "yes",
-                "img_quality": "high",
+                "chapter_id": chapter_id,
+                "split": "yes" if split else "no",
+                "img_quality": quality,
             },
         )
         response_proto = Response()
@@ -122,13 +124,19 @@ class MangaLoader:
     def _format_filename(self, title, chapter):
         return f"{title}-{chapter}"
 
-    def save(self, dst: str, exporter_cls: Type[ExporterBase] = RawExporter):
-        response = self._load_pages()
+    def download_chapter(
+        self,
+        chapter_id: Union[str, int],
+        dst: str,
+        quality: str = "super_high",
+        split: bool = False,
+    ):
+        response = self._load_pages(chapter_id, quality, split)
         viewer = response.success.mangaviewer
         pages = [p.mangaPage for p in viewer.pages if p.mangaPage.image_url]
         title = viewer.titleName
         chapter_name = viewer.chapterName
-        exporter: ExporterBase = exporter_cls(dst, title, chapter_name)
+        exporter: ExporterBase = self.exporter_cls(dst, title, chapter_name)
         log.info("Manga: %s", title)
         log.info("Chapter: %s", chapter_name)
         log.info("Found pages: %s", len(pages))
@@ -183,22 +191,41 @@ def validate_chapters(ctx, param, value):
 @click.option(
     "--raw",
     "-r",
-    "raw",
     is_flag=True,
     default=False,
     show_default=True,
     help="Save raw images",
     envvar="MLOADER_RAW",
 )
+@click.option(
+    "--quality",
+    "-q",
+    default="super_high",
+    type=click.Choice(["super_high", "high", "low"]),
+    show_default=True,
+    help="Image quality",
+    envvar="MLOADER_QUALITY",
+)
+@click.option(
+    "--split",
+    "-s",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="Split combined images",
+    envvar="MLOADER_SPLIT",
+)
 @click.argument("chapters", nargs=-1, callback=validate_chapters)
-def main(out_dir: str, chapters: Tuple[int], raw: bool):
+def main(
+    out_dir: str, chapters: Tuple[int], raw: bool, quality: str, split: bool
+):
     setup_logging()
     log.info("Started export")
 
     for chapter_id in chapters:
-        loader = MangaLoader(chapter_id)
+        loader = MangaLoader(RawExporter if raw else CBZExporter)
         try:
-            loader.save(out_dir, RawExporter if raw else CBZExporter)
+            loader.download_chapter(chapter_id, out_dir, quality, split)
         except Exception:
-            log.exception("Failed to save images")
+            log.exception("Failed to download_chapter images")
     log.info("SUCCESS")
