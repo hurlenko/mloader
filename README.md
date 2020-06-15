@@ -38,8 +38,11 @@ Currently `mloader` supports these commands
 Usage: mloader [OPTIONS] [CHAPTERS]...
 
 Options:
-  -o, --out <directory>  Save directory (not a file)  [default:
-                         mangaplus_downloads]
-  -r, --raw              Save raw images  [default: False]
-  --help                 Show this message and exit.
+  -o, --out <directory>           Save directory (not a file)  [default:
+                                  mangaplus_downloads]
+  -r, --raw                       Save raw images  [default: False]
+  -q, --quality [super_high|high|low]
+                                  Image quality  [default: super_high]
+  -s, --split                     Split combined images  [default: False]
+  --help                          Show this message and exit.
 ```
