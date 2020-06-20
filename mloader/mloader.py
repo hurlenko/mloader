@@ -17,6 +17,8 @@ log = logging.getLogger()
 
 
 def setup_logging():
+    for logger in ("requests", "urllib3"):
+        logging.getLogger(logger).setLevel(logging.WARNING)
     handlers = [logging.StreamHandler(sys.stdout)]
     logging.basicConfig(
         handlers=handlers,
@@ -141,7 +143,7 @@ class MangaLoader:
         log.info("Chapter: %s", chapter_name)
         log.info("Found pages: %s", len(pages))
         with click.progressbar(
-            pages, label=chapter_name, show_pos=True,
+            pages, label=chapter_name, show_pos=True
         ) as pbar:
             for i, page in enumerate(pbar, 1):
                 image_blob = self._decrypt_image(
@@ -155,7 +157,7 @@ class MangaLoader:
 def validate_chapters(ctx, param, value):
     if not value:
         return value
-    res = []
+    res = set()
     for item in value:
         if "title" in value:
             raise click.BadParameter(
@@ -166,7 +168,7 @@ def validate_chapters(ctx, param, value):
         if match:
             item = match.group(1)
         try:
-            res.append(int(item))
+            res.add(int(item))
         except ValueError:
             raise click.BadParameter(
                 "Chapter must be an integer or a link in format "
@@ -216,9 +218,18 @@ def validate_chapters(ctx, param, value):
     envvar="MLOADER_SPLIT",
 )
 @click.argument("chapters", nargs=-1, callback=validate_chapters)
+@click.pass_context
 def main(
-    out_dir: str, chapters: Tuple[int], raw: bool, quality: str, split: bool
+    ctx: click.Context,
+    out_dir: str,
+    chapters: Tuple[int],
+    raw: bool,
+    quality: str,
+    split: bool,
 ):
+    if not chapters:
+        click.echo(ctx.get_help())
+        return
     setup_logging()
     log.info("Started export")
 
