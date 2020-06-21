@@ -46,6 +46,7 @@ tmtagsHistory
 *.json
 *.db
 log.txt
+*.js
 
 # Directories #
 ######################
@@ -54,3 +55,4 @@ venv/
 # [date]full_name(id) report folders
 \[*\]*\(*\)/
 *.egg-info
+mangaplus_downloads/

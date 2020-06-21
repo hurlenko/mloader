@@ -39,7 +39,7 @@ class ExporterBase(metaclass=ABCMeta):
         self.chapter = self.escape_path(chapter)
 
     def format_image_name(self, index: int, ext=".png") -> str:
-        return f"{self.title}-{index:0>3}.{ext}"
+        return f"{self.title}-{index:0>3}.{ext.lstrip('.')}"
 
     def escape_path(self, path: str) -> str:
         return re.sub(r"[^\w]+", " ", path).strip(string.punctuation + " ")
@@ -82,7 +82,8 @@ class CBZExporter(ExporterBase):
         )
 
     def add_image(self, image_data: bytes, index: int):
-        self.archive.writestr(self.format_image_name(index), image_data)
+        path = Path(self.title, self.format_image_name(index))
+        self.archive.writestr(path.as_posix(), image_data)
 
     def close(self):
         self.archive.close()
@@ -134,10 +135,10 @@ class MangaLoader:
         split: bool = False,
     ):
         response = self._load_pages(chapter_id, quality, split)
-        viewer = response.success.mangaviewer
-        pages = [p.mangaPage for p in viewer.pages if p.mangaPage.image_url]
-        title = viewer.titleName
-        chapter_name = viewer.chapterName
+        viewer = response.success.manga_viewer
+        pages = [p.manga_page for p in viewer.pages if p.manga_page.image_url]
+        title = viewer.title_name
+        chapter_name = viewer.chapter_name
         exporter: ExporterBase = self.exporter_cls(dst, title, chapter_name)
         log.info("Manga: %s", title)
         log.info("Chapter: %s", chapter_name)
