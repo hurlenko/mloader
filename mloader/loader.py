@@ -1,22 +1,35 @@
 import logging
 from enum import Enum
 from itertools import chain
-from typing import Type, Union, List, Dict
+from typing import Type, Union, List, Dict, Set
 
 import click
 from requests import Session
 
 from mloader.exporter import ExporterBase, CBZExporter
-from mloader.response_pb2 import Response, MangaViewer, TitleDetailView, Chapter
+from mloader.response_pb2 import Response, MangaViewer, TitleDetailView
 
 log = logging.getLogger()
 
-MangaList = Dict[int, Dict[int, Chapter]]
+MangaList = Dict[int, Set[int]]
 
 
 class Language(Enum):
     eng = 0
-    esp = 1
+    spa = 1
+
+
+class PageType(Enum):
+    single = 0
+    left = 1
+    right = 2
+    double = 3
+
+
+class ChapterType(Enum):
+    latest = 0
+    sequence = 1
+    nosequence = 2
 
 
 class MangaLoader:
@@ -64,9 +77,6 @@ class MangaLoader:
         )
         return Response.FromString(resp.content).success.title_detail_view
 
-    def _format_filename(self, title: str, chapter: str) -> str:
-        return f"{title}-{chapter}"
-
     def _normalize_ids(
         self, title_ids: List[int], chapter_ids: List[int]
     ) -> MangaList:
@@ -78,20 +88,16 @@ class MangaLoader:
             title_id = viewer.title_id
             if title_id in title_ids:
                 title_ids.remove(title_id)
-                # Todo save ids only
-                mangas.setdefault(title_id, {}).update(
-                    {x.chapter_id: x for x in viewer.chapters}
+                mangas.setdefault(title_id, set()).update(
+                    x.chapter_id for x in viewer.chapters
                 )
             else:
-                chapter = next(
-                    x for x in viewer.chapters if x.chapter_id == cid
-                )
-                mangas.setdefault(title_id, {})[viewer.chapter_id] = chapter
+                mangas.setdefault(title_id, set()).add(cid)
 
         for tid in title_ids:
             title_details = self._get_title_details(tid)
             mangas[tid] = {
-                x.chapter_id: x
+                x.chapter_id
                 for x in chain(
                     title_details.first_chapter_list,
                     title_details.last_chapter_list,
@@ -105,11 +111,11 @@ class MangaLoader:
     ):
         for title_id, chapters in manga_list.items():
             title_details = self._get_title_details(title_id)
-            title_name = title_details.title.name
+            title_name = title_details.title_name.name
             log.info("Manga: %s", title_name)
-            log.info("Author: %s", title_details.title.author)
+            log.info("Author: %s", title_details.title_name.author)
 
-            for chapter_id, _ in chapters.items():
+            for chapter_id in chapters:
                 viewer = self._load_pages(chapter_id)
                 chapter = next(
                     x for x in viewer.chapters if x.chapter_id == chapter_id
@@ -124,7 +130,7 @@ class MangaLoader:
                 with click.progressbar(
                     pages, label=chapter_name, show_pos=True
                 ) as pbar:
-                    for i, page in enumerate(pbar, 1):
+                    for i, page in enumerate(pbar, 0):
                         image_blob = self._decrypt_image(
                             page.image_url, page.encryption_key
                         )
@@ -133,7 +139,7 @@ class MangaLoader:
                 exporter.close()
 
     def download_chapter(self, chapter_id: int, dst: str):
-        self._download(self._normalize_ids([], [chapter_id]), dst)
+        self._download(self._normalize_ids([100059], []), dst)
 
     def download_title(self, title_id: int, dst: str):
         pass
