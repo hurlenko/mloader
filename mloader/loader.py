@@ -1,5 +1,6 @@
 import logging
 from enum import Enum
+from functools import lru_cache
 from itertools import chain
 from typing import Type, Union, List, Dict, Set
 
@@ -12,18 +13,6 @@ from mloader.response_pb2 import Response, MangaViewer, TitleDetailView
 log = logging.getLogger()
 
 MangaList = Dict[int, Set[int]]
-
-
-class Language(Enum):
-    eng = 0
-    spa = 1
-
-
-class PageType(Enum):
-    single = 0
-    left = 1
-    right = 2
-    double = 3
 
 
 class ChapterType(Enum):
@@ -60,6 +49,7 @@ class MangaLoader:
             data[s] ^= key[s % a]
         return data
 
+    @lru_cache(None)
     def _load_pages(self, chapter_id: Union[str, int]) -> MangaViewer:
         resp = self.session.get(
             f"{self._api_url}/api/manga_viewer",
@@ -71,6 +61,7 @@ class MangaLoader:
         )
         return Response.FromString(resp.content).success.manga_viewer
 
+    @lru_cache(None)
     def _get_title_details(self, title_id: Union[str, int]) -> TitleDetailView:
         resp = self.session.get(
             f"{self._api_url}/api/title_detail", params={"title_id": title_id},
@@ -110,10 +101,11 @@ class MangaLoader:
         self, manga_list: MangaList, dst: str,
     ):
         for title_id, chapters in manga_list.items():
-            title_details = self._get_title_details(title_id)
-            title_name = title_details.title_name.name
+            title = self._get_title_details(title_id).title
+
+            title_name = title.name
             log.info("Manga: %s", title_name)
-            log.info("Author: %s", title_details.title_name.author)
+            log.info("Author: %s", title.author)
 
             for chapter_id in chapters:
                 viewer = self._load_pages(chapter_id)
@@ -122,7 +114,7 @@ class MangaLoader:
                 )
                 chapter_name = viewer.chapter_name
                 log.info("Chapter: %s %s", chapter_name, chapter.sub_title)
-                exporter = self.exporter_cls(dst, title_name, chapter_name)
+                exporter = self.exporter_cls(dst, title, chapter)
                 pages = [
                     p.manga_page for p in viewer.pages if p.manga_page.image_url
                 ]
@@ -139,7 +131,7 @@ class MangaLoader:
                 exporter.close()
 
     def download_chapter(self, chapter_id: int, dst: str):
-        self._download(self._normalize_ids([100059], []), dst)
+        self._download(self._normalize_ids([], [chapter_id]), dst)
 
     def download_title(self, title_id: int, dst: str):
         pass
