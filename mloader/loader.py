@@ -1,8 +1,8 @@
 import logging
 from enum import Enum
 from functools import lru_cache
-from itertools import chain
-from typing import Type, Union, List, Dict, Set
+from itertools import chain, count
+from typing import Type, Union, Dict, Set, Collection, Optional
 
 import click
 from requests import Session
@@ -19,6 +19,13 @@ class ChapterType(Enum):
     latest = 0
     sequence = 1
     nosequence = 2
+
+
+class PageType(Enum):
+    single = 0
+    left = 1
+    right = 2
+    double = 3
 
 
 class MangaLoader:
@@ -69,10 +76,12 @@ class MangaLoader:
         return Response.FromString(resp.content).success.title_detail_view
 
     def _normalize_ids(
-        self, title_ids: List[int], chapter_ids: List[int]
+        self, title_ids: Collection[int], chapter_ids: Collection[int],
     ) -> MangaList:
-        title_ids = set(title_ids)
-        chapter_ids = set(chapter_ids)
+        if not any((title_ids, chapter_ids)):
+            raise ValueError("Expected at least one title or chapter id")
+        title_ids = set(title_ids or [])
+        chapter_ids = set(chapter_ids or [])
         mangas = {}
         for cid in chapter_ids:
             viewer = self._load_pages(cid)
@@ -97,24 +106,31 @@ class MangaLoader:
 
         return mangas
 
-    def _download(
-        self, manga_list: MangaList, dst: str,
-    ):
-        for title_id, chapters in manga_list.items():
+    def _download(self, manga_list: MangaList, dst: str):
+        manga_num = len(manga_list)
+        for title_index, (title_id, chapters) in enumerate(
+            manga_list.items(), 1
+        ):
             title = self._get_title_details(title_id).title
 
             title_name = title.name
-            log.info("Manga: %s", title_name)
-            log.info("Author: %s", title.author)
+            log.info(f"{title_index}/{manga_num}) Manga: {title_name}")
+            log.info("    Author: %s", title.author)
 
-            for chapter_id in chapters:
+            chapter_num = len(chapters)
+            for chapter_index, chapter_id in enumerate(sorted(chapters), 1):
                 viewer = self._load_pages(chapter_id)
-                chapter = next(
-                    x for x in viewer.chapters if x.chapter_id == chapter_id
+                chapter = viewer.pages[-1].last_page.current_chapter
+                next_chapter = viewer.pages[-1].last_page.next_chapter
+                next_chapter = (
+                    next_chapter if next_chapter.chapter_id != 0 else None
                 )
                 chapter_name = viewer.chapter_name
-                log.info("Chapter: %s %s", chapter_name, chapter.sub_title)
-                exporter = self.exporter_cls(dst, title, chapter)
+                log.info(
+                    f"    {chapter_index}/{chapter_num}) "
+                    f"Chapter {chapter_name}: {chapter.sub_title}"
+                )
+                exporter = self.exporter_cls(dst, title, chapter, next_chapter)
                 pages = [
                     p.manga_page for p in viewer.pages if p.manga_page.image_url
                 ]
@@ -122,16 +138,23 @@ class MangaLoader:
                 with click.progressbar(
                     pages, label=chapter_name, show_pos=True
                 ) as pbar:
-                    for i, page in enumerate(pbar, 0):
+                    page_counter = count()
+                    for page_index, page in zip(page_counter, pbar):
+                        # Todo use asyncio + async requests 3
                         image_blob = self._decrypt_image(
                             page.image_url, page.encryption_key
                         )
-                        exporter.add_image(image_blob, i)
+                        if PageType(page.type) == PageType.double:
+                            page_index = range(page_index, next(page_counter))
+                        exporter.add_image(image_blob, page_index)
 
                 exporter.close()
 
-    def download_chapter(self, chapter_id: int, dst: str):
-        self._download(self._normalize_ids([], [chapter_id]), dst)
-
-    def download_title(self, title_id: int, dst: str):
-        pass
+    def download(
+        self,
+        *,
+        title_ids: Optional[Collection[int]] = None,
+        chapter_ids: Optional[Collection[int]] = None,
+        dst: str = ".",
+    ):
+        self._download(self._normalize_ids(title_ids, chapter_ids), dst)

@@ -1,7 +1,7 @@
 import logging
 import re
 import sys
-from typing import Tuple
+from typing import Optional, Set
 
 import click
 
@@ -28,28 +28,34 @@ def setup_logging():
     )
 
 
-def validate_chapters(ctx, param, value):
+setup_logging()
+
+
+def validate_urls(ctx: click.Context, param, value):
     if not value:
         return value
-    res = set()
-    for item in value:
-        if "title" in value:
-            raise click.BadParameter(
-                f"Title downloads are not supported: {item}. "
-                f"Use chapter links - <site>/viewer/<chapter_id>"
-            )
-        match = re.search(r"viewer/(\d+)", item)
-        if match:
-            item = match.group(1)
-        try:
-            res.add(int(item))
-        except ValueError:
-            raise click.BadParameter(
-                "Chapter must be an integer or a link in format "
-                "<site>/viewer/<chapter_id>"
-            )
 
-    return res
+    res = {"viewer": set(), "titles": set()}
+    for url in value:
+        match = re.search(r"(\w+)/(\d+)", url)
+        if not match:
+            raise click.BadParameter(f"Invalid url: {url}")
+        try:
+            res[match.group(1)].add(int(match.group(2)))
+        except (ValueError, KeyError):
+            raise click.BadParameter(f"Invalid url: {url}")
+
+    ctx.params.setdefault("titles", set()).update(res["titles"])
+    ctx.params.setdefault("chapters", set()).update(res["viewer"])
+
+
+def validate_ids(ctx: click.Context, param, value):
+    if not value:
+        return value
+
+    assert param.name in ("chapter", "title")
+
+    ctx.params.setdefault(f"{param.name}s", set()).update(value)
 
 
 @click.command(short_help=about.__description__)
@@ -91,30 +97,45 @@ def validate_chapters(ctx, param, value):
     help="Split combined images",
     envvar="MLOADER_SPLIT",
 )
-@click.argument("chapters", nargs=-1, callback=validate_chapters)
+@click.option(
+    "--chapter",
+    "-c",
+    type=click.INT,
+    multiple=True,
+    help="Chapter id",
+    expose_value=False,
+    callback=validate_ids,
+)
+@click.option(
+    "--title",
+    "-t",
+    type=click.INT,
+    multiple=True,
+    help="Title id",
+    expose_value=False,
+    callback=validate_ids,
+)
+@click.argument("urls", nargs=-1, callback=validate_urls, expose_value=False)
 @click.pass_context
 def main(
     ctx: click.Context,
     out_dir: str,
-    chapters: Tuple[int],
     raw: bool,
     quality: str,
     split: bool,
+    chapters: Optional[Set[int]] = None,
+    titles: Optional[Set[int]] = None,
 ):
-    if not chapters:
+    if not any((chapters, titles)):
         click.echo(ctx.get_help())
         return
-    setup_logging()
     log.info("Started export")
 
-    for chapter_id in chapters:
-        loader = MangaLoader(
-            RawExporter if raw else CBZExporter, quality, split
-        )
-        try:
-            loader.download_chapter(chapter_id, out_dir)
-        except Exception:
-            log.exception("Failed to download_chapter images")
+    loader = MangaLoader(RawExporter if raw else CBZExporter, quality, split)
+    try:
+        loader.download(title_ids=titles, chapter_ids=chapters, dst=out_dir)
+    except Exception:
+        log.exception("Failed to download manga")
     log.info("SUCCESS")
 
 
