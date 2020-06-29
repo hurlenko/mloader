@@ -42,5 +42,5 @@ setup(
         "Programming Language :: Python :: Implementation :: CPython",
     ],
     project_urls={"Source": about["__url__"]},
-    entry_points={"console_scripts": ["mloader = mloader.mloader:main",]},
+    entry_points={"console_scripts": ["mloader = mloader.__main__:main",]},
 )
