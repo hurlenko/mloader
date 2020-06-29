@@ -59,6 +59,12 @@ def validate_ids(ctx: click.Context, param, value):
 
 
 @click.command(short_help=about.__description__)
+@click.version_option(
+    about.__version__,
+    prog_name="mloader",
+    message="%(prog)s by Hurlenko, version %(version)s\n"
+    "Chek https://github.com/hurlenko/mloader for more info",
+)
 @click.option(
     "--out",
     "-o",

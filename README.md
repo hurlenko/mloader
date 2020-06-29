@@ -4,7 +4,7 @@
 ![Python](https://img.shields.io/badge/python-v3.6+-blue.svg)
 ![License](https://img.shields.io/badge/license-GPLv3-blue.svg)
 
-## **mloader** - download manga chapters from mangaplus.shueisha.co.jp
+## **mloader** - download manga from mangaplus.shueisha.co.jp
 
 ## 🚩 Table of Contents
 
@@ -24,18 +24,20 @@ After installation, the `mloader` command will be available. Check the [command 
 
 ## 📙 Usage
 
-Copy the url or the id of the chapter you want to download and pass it to `mloader`. Urls have form mangaplus.shueisha.co.jp/viewer/**[chapter_id_here]**.
+Copy the url of the chapter or title you want to download and pass it to `mloader`.
 
-Note that title downloads (title id's have form `[website]/title/[title_id]`) are not supported but you can pass multiple urls/chapter id's.
+You can use `--title` or `--chapter` command line argument to download by title or chapter id.
 
-Chapters can be saved as `CBZ` archives (default) or separate images by passing the `raw` parameter.
+You can download individual chapters or full title (but only available chapters).
+
+Chapters can be saved as `CBZ` archives (default) or separate images by passing the `--raw` parameter.
 
 ## 🖥️ Command line interface
 
 Currently `mloader` supports these commands
 
 ```bash
-Usage: mloader [OPTIONS] [CHAPTERS]...
+Usage: mloader [OPTIONS] [URLS]...
 
 Options:
   -o, --out <directory>           Save directory (not a file)  [default:
@@ -44,5 +46,7 @@ Options:
   -q, --quality [super_high|high|low]
                                   Image quality  [default: super_high]
   -s, --split                     Split combined images  [default: False]
+  -c, --chapter INTEGER           Chapter id
+  -t, --title INTEGER             Title id
   --help                          Show this message and exit.
 ```
