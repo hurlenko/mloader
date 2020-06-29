@@ -26,7 +26,7 @@ After installation, the `mloader` command will be available. Check the [command 
 
 Copy the url of the chapter or title you want to download and pass it to `mloader`.
 
-You can use `--title` or `--chapter` command line argument to download by title or chapter id.
+You can use `--title` and `--chapter` command line argument to download by title and chapter id.
 
 You can download individual chapters or full title (but only available chapters).
 
@@ -41,7 +41,7 @@ Usage: mloader [OPTIONS] [URLS]...
 
 Options:
   -o, --out <directory>           Save directory (not a file)  [default:
-                                  mangaplus_downloads]
+                                  mloader_downloads]
   -r, --raw                       Save raw images  [default: False]
   -q, --quality [super_high|high|low]
                                   Image quality  [default: super_high]

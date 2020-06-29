@@ -58,12 +58,17 @@ def validate_ids(ctx: click.Context, param, value):
     ctx.params.setdefault(f"{param.name}s", set()).update(value)
 
 
-@click.command(short_help=about.__description__)
+@click.command(
+    help=about.__description__,
+    epilog="Example: download raw manga images in low quality for "
+    "chapter 123123 and title 55555 and save to current directory\n\n"
+    "$ mloader https://website.com/titles/55555 -c 123123 -r -q low -o .",
+)
 @click.version_option(
     about.__version__,
-    prog_name="mloader",
+    prog_name=about.__title__,
     message="%(prog)s by Hurlenko, version %(version)s\n"
-    "Chek https://github.com/hurlenko/mloader for more info",
+    f"Check {about.__url__} for more info",
 )
 @click.option(
     "--out",
@@ -71,7 +76,7 @@ def validate_ids(ctx: click.Context, param, value):
     "out_dir",
     type=click.Path(exists=False, writable=True),
     metavar="<directory>",
-    default="mangaplus_downloads",
+    default="mloader_downloads",
     show_default=True,
     help="Save directory (not a file)",
     envvar="MLOADER_EXTRACT_OUT_DIR",
@@ -147,4 +152,4 @@ def main(
 
 if __name__ == "__main__":
     click.echo(click.style(about.__doc__, fg="blue"))
-    main(prog_name="mloader")
+    main(prog_name=about.__title__)

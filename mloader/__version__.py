@@ -7,7 +7,7 @@
 """
 
 __title__ = "mloader"
-__description__ = "Command-line tool to download manga chapters from mangaplus"
+__description__ = "Command-line tool to download manga from mangaplus"
 __url__ = "https://github.com/hurlenko/mloader"
-__version__ = "1.1.1"
+__version__ = "1.1.2"
 __license__ = "GPLv3"

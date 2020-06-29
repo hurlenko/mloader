@@ -55,4 +55,4 @@ venv/
 # [date]full_name(id) report folders
 \[*\]*\(*\)/
 *.egg-info
-mangaplus_downloads/
+mloader_downloads/
