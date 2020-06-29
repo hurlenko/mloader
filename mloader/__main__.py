@@ -137,6 +137,7 @@ def main(
     chapters: Optional[Set[int]] = None,
     titles: Optional[Set[int]] = None,
 ):
+    click.echo(click.style(about.__doc__, fg="blue"))
     if not any((chapters, titles)):
         click.echo(ctx.get_help())
         return
@@ -151,5 +152,4 @@ def main(
 
 
 if __name__ == "__main__":
-    click.echo(click.style(about.__doc__, fg="blue"))
     main(prog_name=about.__title__)
