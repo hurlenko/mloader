@@ -102,14 +102,10 @@ class ExporterBase(metaclass=ABCMeta):
             page = f"p{page.start:0>3}-{page.stop:0>3}"
         else:
             page = f"p{page:0>3}"
-        return " ".join(
-            (
-                self._chapter_prefix,
-                page,
-                self._chapter_suffix,
-                f".{ext.lstrip('.')}",
-            )
-        )
+
+        ext = ext.lstrip('.')
+
+        return f"{self._chapter_prefix} - {page} {self._chapter_suffix}.{ext}"
 
     def escape_path(self, path: str) -> str:
         return re.sub(r"[^\w]+", " ", path).strip(string.punctuation + " ")
