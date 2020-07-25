@@ -97,7 +97,7 @@ class ExporterBase(metaclass=ABCMeta):
     def _format_chapter_suffix(self) -> str:
         return " ".join(chain(self._extra_info, ["[Viz]"]))
 
-    def format_page_name(self, page: Union[int, range], ext=".png") -> str:
+    def format_page_name(self, page: Union[int, range], ext=".jpg") -> str:
         if isinstance(page, range):
             page = f"p{page.start:0>3}-{page.stop:0>3}"
         else:
