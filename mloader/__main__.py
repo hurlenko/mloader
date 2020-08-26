@@ -58,11 +58,30 @@ def validate_ids(ctx: click.Context, param, value):
     ctx.params.setdefault(f"{param.name}s", set()).update(value)
 
 
+EPILOG = f"""
+Examples:
+
+{click.style('• download manga chapter 1 as CBZ archive', fg="green")}
+
+    $ mloader https://mangaplus.shueisha.co.jp/viewer/1
+
+{click.style('• download all chapters for manga title 2 and save '
+'to current directory', fg="green")}
+
+    $ mloader https://mangaplus.shueisha.co.jp/titles/2 -o .
+
+{click.style('• download chapter 1 AND all available chapters from '
+'title 2 (can be two different manga) in low quality and save as '
+'separate images', fg="green")}
+
+    $ mloader https://mangaplus.shueisha.co.jp/viewer/1 
+    https://mangaplus.shueisha.co.jp/titles/2 -r -q low
+"""
+
+
 @click.command(
     help=about.__description__,
-    epilog="Example: download raw manga images in low quality for "
-    "chapter 123123 and title 55555 and save to current directory\n\n"
-    "$ mloader https://website.com/titles/55555 -c 123123 -r -q low -o .",
+    epilog=EPILOG,
 )
 @click.version_option(
     about.__version__,
