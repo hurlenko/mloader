@@ -106,7 +106,7 @@ class MangaLoader:
 
         return mangas
 
-    def _download(self, manga_list: MangaList, dst: str):
+    def _download(self, manga_list: MangaList, dst: str, begin: int, end : int):
         manga_num = len(manga_list)
         for title_index, (title_id, chapters) in enumerate(
             manga_list.items(), 1
@@ -130,6 +130,11 @@ class MangaLoader:
                     f"    {chapter_index}/{chapter_num}) "
                     f"Chapter {chapter_name}: {chapter.sub_title}"
                 )
+                if (begin and begin > int(chapter_name[1:])) or (end and end < int(chapter_name[1:])):
+                    log.info(
+                        f"                        SKIPPED"
+                    )
+                    continue
                 exporter = self.exporter_cls(dst, title, chapter, next_chapter)
                 pages = [
                     p.manga_page for p in viewer.pages if p.manga_page.image_url
@@ -156,5 +161,7 @@ class MangaLoader:
         title_ids: Optional[Collection[int]] = None,
         chapter_ids: Optional[Collection[int]] = None,
         dst: str = ".",
+        begin: int = None,
+        end: int = None,
     ):
-        self._download(self._normalize_ids(title_ids, chapter_ids), dst)
+        self._download(self._normalize_ids(title_ids, chapter_ids), dst, begin, end)
