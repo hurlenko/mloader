@@ -145,6 +145,28 @@ Examples:
     expose_value=False,
     callback=validate_ids,
 )
+@click.option(
+    "--begin",
+    "-b",
+    type=click.IntRange(min=0),
+    default=0,
+    show_default=True,
+    help="Minimal chapter to try to download",
+)
+@click.option(
+    "--end",
+    "-e",
+    type=click.IntRange(min=1),
+    help="Maximal chapter to try to download",
+)
+@click.option(
+    "--last",
+    "-l",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="Download only the last chapter for title",
+)
 @click.argument("urls", nargs=-1, callback=validate_urls, expose_value=False)
 @click.pass_context
 def main(
@@ -153,6 +175,9 @@ def main(
     raw: bool,
     quality: str,
     split: bool,
+    begin: int,
+    end: int,
+    last: bool,
     chapters: Optional[Set[int]] = None,
     titles: Optional[Set[int]] = None,
 ):
@@ -160,11 +185,19 @@ def main(
     if not any((chapters, titles)):
         click.echo(ctx.get_help())
         return
+    end = end or float("inf")
     log.info("Started export")
 
     loader = MangaLoader(RawExporter if raw else CBZExporter, quality, split)
     try:
-        loader.download(title_ids=titles, chapter_ids=chapters, dst=out_dir)
+        loader.download(
+            title_ids=titles,
+            chapter_ids=chapters,
+            min_chapter=begin,
+            max_chapter=end,
+            last_chapter=last,
+            dst=out_dir,
+        )
     except Exception:
         log.exception("Failed to download manga")
     log.info("SUCCESS")

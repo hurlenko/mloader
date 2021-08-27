@@ -1,5 +1,4 @@
 import logging
-from enum import Enum
 from functools import lru_cache
 from itertools import chain, count
 from typing import Type, Union, Dict, Set, Collection, Optional
@@ -7,25 +6,14 @@ from typing import Type, Union, Dict, Set, Collection, Optional
 import click
 from requests import Session
 
+from mloader.constants import PageType
 from mloader.exporter import ExporterBase, CBZExporter
 from mloader.response_pb2 import Response, MangaViewer, TitleDetailView
+from mloader.utils import chapter_name_to_int
 
 log = logging.getLogger()
 
-MangaList = Dict[int, Set[int]]
-
-
-class ChapterType(Enum):
-    latest = 0
-    sequence = 1
-    nosequence = 2
-
-
-class PageType(Enum):
-    single = 0
-    left = 1
-    right = 2
-    double = 3
+MangaList = Dict[int, Set[int]]  # Title ID: Set[Chapter ID]
 
 
 class MangaLoader:
@@ -71,13 +59,21 @@ class MangaLoader:
     @lru_cache(None)
     def _get_title_details(self, title_id: Union[str, int]) -> TitleDetailView:
         resp = self.session.get(
-            f"{self._api_url}/api/title_detail", params={"title_id": title_id},
+            f"{self._api_url}/api/title_detail", params={"title_id": title_id}
         )
         return Response.FromString(resp.content).success.title_detail_view
 
     def _normalize_ids(
-        self, title_ids: Collection[int], chapter_ids: Collection[int],
+        self,
+        title_ids: Collection[int],
+        chapter_ids: Collection[int],
+        min_chapter: int,
+        max_chapter: int,
+        last_chapter: bool = False,
     ) -> MangaList:
+        # mloader allows you to mix chapters and titles(collections of chapters)
+        # This method tries to merge them while trying to avoid unnecessary
+        # http requests
         if not any((title_ids, chapter_ids)):
             raise ValueError("Expected at least one title or chapter id")
         title_ids = set(title_ids or [])
@@ -86,23 +82,36 @@ class MangaLoader:
         for cid in chapter_ids:
             viewer = self._load_pages(cid)
             title_id = viewer.title_id
+            # Fetching details for this chapter also downloads all other
+            # visible chapters for the same title.
             if title_id in title_ids:
                 title_ids.remove(title_id)
-                mangas.setdefault(title_id, set()).update(
-                    x.chapter_id for x in viewer.chapters
-                )
+                mangas.setdefault(title_id, []).extend(viewer.chapters)
             else:
-                mangas.setdefault(title_id, set()).add(cid)
+                # Should result in one chapter
+                mangas.setdefault(title_id, []).extend(
+                    c for c in viewer.chapters if c.chapter_id == cid
+                )
 
         for tid in title_ids:
-            title_details = self._get_title_details(tid)
-            mangas[tid] = {
-                x.chapter_id
-                for x in chain(
-                    title_details.first_chapter_list,
-                    title_details.last_chapter_list,
-                )
-            }
+            details = self._get_title_details(tid)
+            mangas[tid] = list(
+                chain(details.first_chapter_list, details.last_chapter_list)
+            )
+
+        for tid in mangas:
+            if last_chapter:
+                chapters = mangas[tid][-1:]
+            else:
+                chapters = [
+                    c
+                    for c in mangas[tid]
+                    if min_chapter
+                    <= (chapter_name_to_int(c.name) or 0)
+                    <= max_chapter
+                ]
+
+            mangas[tid] = set(c.chapter_id for c in chapters)
 
         return mangas
 
@@ -155,6 +164,12 @@ class MangaLoader:
         *,
         title_ids: Optional[Collection[int]] = None,
         chapter_ids: Optional[Collection[int]] = None,
+        min_chapter: int,
+        max_chapter: int,
+        last_chapter: bool = False,
         dst: str = ".",
     ):
-        self._download(self._normalize_ids(title_ids, chapter_ids), dst)
+        manga_list = self._normalize_ids(
+            title_ids, chapter_ids, min_chapter, max_chapter, last_chapter
+        )
+        self._download(manga_list, dst)
