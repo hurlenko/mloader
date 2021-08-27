@@ -13,6 +13,10 @@ from mloader.response_pb2 import Title, Chapter
 class Language(Enum):
     eng = 0
     spa = 1
+    ind = 3
+    por = 4
+    rus = 5
+    tha = 6
 
 
 class ExporterBase(metaclass=ABCMeta):
