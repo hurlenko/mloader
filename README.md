@@ -39,7 +39,10 @@ Currently `mloader` supports these commands
 ```bash
 Usage: mloader [OPTIONS] [URLS]...
 
+  Command-line tool to download manga from mangaplus
+
 Options:
+  --version                       Show the version and exit.
   -o, --out <directory>           Save directory (not a file)  [default:
                                   mloader_downloads]
   -r, --raw                       Save raw images  [default: False]
@@ -48,5 +51,12 @@ Options:
   -s, --split                     Split combined images  [default: False]
   -c, --chapter INTEGER           Chapter id
   -t, --title INTEGER             Title id
+  -b, --begin INTEGER RANGE       Minimal chapter to try to download
+                                  [default: 0;x>=0]
+  -e, --end INTEGER RANGE         Maximal chapter to try to download  [x>=1]
+  -l, --last                      Download only the last chapter for title
+                                  [default: False]
+  --chapter-title                 Include chapter titles in filenames
+                                  [default: False]
   --help                          Show this message and exit.
 ```
