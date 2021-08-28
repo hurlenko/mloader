@@ -16,8 +16,10 @@ class ExporterBase(metaclass=ABCMeta):
         title: Title,
         chapter: Chapter,
         next_chapter: Optional[Chapter] = None,
+        add_chapter_title: bool = False,
     ):
         self.destination = destination
+        self.add_chapter_title = add_chapter_title
         self.title_name = escape_path(title.name).title()
         self.is_oneshot = is_oneshot(chapter.name, chapter.sub_title)
         self.is_extra = chapter.name == "ex"
@@ -27,7 +29,7 @@ class ExporterBase(metaclass=ABCMeta):
         if self.is_oneshot:
             self._extra_info.append("[Oneshot]")
 
-        if self.is_extra:
+        if self.is_extra or self.add_chapter_title:
             self._extra_info.append(f"[{escape_path(chapter.sub_title)}]")
 
         self._chapter_prefix = self._format_chapter_prefix(
@@ -97,14 +99,8 @@ class ExporterBase(metaclass=ABCMeta):
 
 
 class RawExporter(ExporterBase):
-    def __init__(
-        self,
-        destination: str,
-        title: Title,
-        chapter: Chapter,
-        next_chapter: Optional[Chapter] = None,
-    ):
-        super().__init__(destination, title, chapter, next_chapter)
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.path = Path(self.destination, self.title_name)
         self.path.mkdir(parents=True, exist_ok=True)
 
@@ -114,15 +110,8 @@ class RawExporter(ExporterBase):
 
 
 class CBZExporter(ExporterBase):
-    def __init__(
-        self,
-        destination: str,
-        title: Title,
-        chapter: Chapter,
-        next_chapter: Optional[Chapter] = None,
-        compression=zipfile.ZIP_DEFLATED,
-    ):
-        super().__init__(destination, title, chapter, next_chapter)
+    def __init__(self, compression=zipfile.ZIP_DEFLATED, *args, **kwargs):
+        super().__init__(*args, **kwargs)
         self.path = Path(self.destination, self.title_name)
         self.path.mkdir(parents=True, exist_ok=True)
         self.path = self.path.joinpath(self.chapter_name).with_suffix(".cbz")

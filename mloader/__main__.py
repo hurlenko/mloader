@@ -1,6 +1,7 @@
 import logging
 import re
 import sys
+from functools import partial
 from typing import Optional, Set
 
 import click
@@ -167,6 +168,13 @@ Examples:
     show_default=True,
     help="Download only the last chapter for title",
 )
+@click.option(
+    "--chapter-title",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="Include chapter titles in filenames",
+)
 @click.argument("urls", nargs=-1, callback=validate_urls, expose_value=False)
 @click.pass_context
 def main(
@@ -178,6 +186,7 @@ def main(
     begin: int,
     end: int,
     last: bool,
+    chapter_title: bool,
     chapters: Optional[Set[int]] = None,
     titles: Optional[Set[int]] = None,
 ):
@@ -188,7 +197,12 @@ def main(
     end = end or float("inf")
     log.info("Started export")
 
-    loader = MangaLoader(RawExporter if raw else CBZExporter, quality, split)
+    exporter = RawExporter if raw else CBZExporter
+    exporter = partial(
+        exporter, destination=out_dir, add_chapter_title=chapter_title
+    )
+
+    loader = MangaLoader(exporter, quality, split)
     try:
         loader.download(
             title_ids=titles,
@@ -196,7 +210,6 @@ def main(
             min_chapter=begin,
             max_chapter=end,
             last_chapter=last,
-            dst=out_dir,
         )
     except Exception:
         log.exception("Failed to download manga")

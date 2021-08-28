@@ -1,14 +1,20 @@
 import logging
 from functools import lru_cache
 from itertools import chain, count
-from typing import Type, Union, Dict, Set, Collection, Optional
+from typing import Union, Dict, Set, Collection, Optional, Callable
 
 import click
 from requests import Session
 
 from mloader.constants import PageType
-from mloader.exporter import ExporterBase, CBZExporter
-from mloader.response_pb2 import Response, MangaViewer, TitleDetailView
+from mloader.exporter import ExporterBase
+from mloader.response_pb2 import (
+    Response,
+    MangaViewer,
+    TitleDetailView,
+    Chapter,
+    Title,
+)
 from mloader.utils import chapter_name_to_int
 
 log = logging.getLogger()
@@ -19,11 +25,11 @@ MangaList = Dict[int, Set[int]]  # Title ID: Set[Chapter ID]
 class MangaLoader:
     def __init__(
         self,
-        exporter_cls: Type[ExporterBase] = CBZExporter,
+        exporter: Callable[[Title, Chapter, Optional[Chapter]], ExporterBase],
         quality: str = "super_high",
         split: bool = False,
     ):
-        self.exporter_cls = exporter_cls
+        self.exporter = exporter
         self.quality = quality
         self.split = split
         self._api_url = "https://jumpg-webapi.tokyo-cdn.com"
@@ -115,7 +121,7 @@ class MangaLoader:
 
         return mangas
 
-    def _download(self, manga_list: MangaList, dst: str):
+    def _download(self, manga_list: MangaList):
         manga_num = len(manga_list)
         for title_index, (title_id, chapters) in enumerate(
             manga_list.items(), 1
@@ -139,7 +145,9 @@ class MangaLoader:
                     f"    {chapter_index}/{chapter_num}) "
                     f"Chapter {chapter_name}: {chapter.sub_title}"
                 )
-                exporter = self.exporter_cls(dst, title, chapter, next_chapter)
+                exporter = self.exporter(
+                    title=title, chapter=chapter, next_chapter=next_chapter
+                )
                 pages = [
                     p.manga_page for p in viewer.pages if p.manga_page.image_url
                 ]
@@ -167,9 +175,8 @@ class MangaLoader:
         min_chapter: int,
         max_chapter: int,
         last_chapter: bool = False,
-        dst: str = ".",
     ):
         manga_list = self._normalize_ids(
             title_ids, chapter_ids, min_chapter, max_chapter, last_chapter
         )
-        self._download(manga_list, dst)
+        self._download(manga_list)

@@ -56,5 +56,7 @@ Options:
   -e, --end INTEGER RANGE         Maximal chapter to try to download  [x>=1]
   -l, --last                      Download only the last chapter for title
                                   [default: False]
+  --chapter-title                 Include chapter titles in filenames
+                                  [default: False]
   --help                          Show this message and exit.
 ```
