@@ -4,6 +4,7 @@ from enum import Enum
 class Language(Enum):
     eng = 0
     spa = 1
+    fre = 2
     ind = 3
     por = 4
     rus = 5
