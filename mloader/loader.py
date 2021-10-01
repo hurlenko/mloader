@@ -1,4 +1,5 @@
 import logging
+from collections import namedtuple
 from functools import lru_cache
 from itertools import chain, count
 from typing import Union, Dict, Set, Collection, Optional, Callable
@@ -85,6 +86,7 @@ class MangaLoader:
         title_ids = set(title_ids or [])
         chapter_ids = set(chapter_ids or [])
         mangas = {}
+        chapter_meta = namedtuple("ChapterMeta", "id name")
         for cid in chapter_ids:
             viewer = self._load_pages(cid)
             title_id = viewer.title_id
@@ -92,18 +94,22 @@ class MangaLoader:
             # visible chapters for the same title.
             if title_id in title_ids:
                 title_ids.remove(title_id)
-                mangas.setdefault(title_id, []).extend(viewer.chapters)
-            else:
-                # Should result in one chapter
                 mangas.setdefault(title_id, []).extend(
-                    c for c in viewer.chapters if c.chapter_id == cid
+                    chapter_meta(c.chapter_id, c.name) for c in viewer.chapters
+                )
+            else:
+                mangas.setdefault(title_id, []).append(
+                    chapter_meta(viewer.chapter_id, viewer.chapter_name)
                 )
 
         for tid in title_ids:
             details = self._get_title_details(tid)
-            mangas[tid] = list(
-                chain(details.first_chapter_list, details.last_chapter_list)
-            )
+            mangas[tid] = [
+                chapter_meta(chapter.chapter_id, chapter.name)
+                for chapter in chain(
+                    details.first_chapter_list, details.last_chapter_list
+                )
+            ]
 
         for tid in mangas:
             if last_chapter:
@@ -117,7 +123,7 @@ class MangaLoader:
                     <= max_chapter
                 ]
 
-            mangas[tid] = set(c.chapter_id for c in chapters)
+            mangas[tid] = set(c.id for c in chapters)
 
         return mangas
 
