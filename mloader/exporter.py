@@ -22,14 +22,14 @@ class ExporterBase(metaclass=ABCMeta):
         self.add_chapter_title = add_chapter_title
         self.title_name = escape_path(title.name).title()
         self.is_oneshot = is_oneshot(chapter.name, chapter.sub_title)
-        self.is_extra = chapter.name == "ex"
+        self.is_extra = self._is_extra(chapter.name)
 
         self._extra_info = []
 
         if self.is_oneshot:
             self._extra_info.append("[Oneshot]")
 
-        if self.is_extra or self.add_chapter_title:
+        if self.add_chapter_title:
             self._extra_info.append(f"[{escape_path(chapter.sub_title)}]")
 
         self._chapter_prefix = self._format_chapter_prefix(
@@ -42,6 +42,9 @@ class ExporterBase(metaclass=ABCMeta):
         self.chapter_name = " ".join(
             (self._chapter_prefix, self._chapter_suffix)
         )
+
+    def _is_extra(self, chapter_name: str) -> bool:
+        return chapter_name.strip("#") == "ex"
 
     def _format_chapter_prefix(
         self,
