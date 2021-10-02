@@ -16,6 +16,8 @@ jobs:
         uses: mikepenz/release-changelog-builder-action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          failOnError: "true"
+          commitMode: "true"
 
       - name: Create Release
         uses: actions/create-release@v1
@@ -23,8 +25,6 @@ jobs:
           tag_name: ${{ github.ref }}
           release_name: ${{ github.ref }}
           body: ${{steps.github_release.outputs.changelog}}
-          failOnError: "true"
-          commitMode: "true"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
@@ -42,5 +42,5 @@ jobs:
       - name: Publish distribution 📦 to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          username: __token__
+          user: __token__
           password: ${{ secrets.PYPI_API_TOKEN }}
