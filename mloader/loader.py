@@ -163,13 +163,14 @@ class MangaLoader:
                 ) as pbar:
                     page_counter = count()
                     for page_index, page in zip(page_counter, pbar):
-                        # Todo use asyncio + async requests 3
-                        image_blob = self._decrypt_image(
-                            page.image_url, page.encryption_key
-                        )
                         if PageType(page.type) == PageType.double:
                             page_index = range(page_index, next(page_counter))
-                        exporter.add_image(image_blob, page_index)
+                        if not exporter.skip_image(page_index):
+                            # Todo use asyncio + async requests 3
+                            image_blob = self._decrypt_image(
+                                page.image_url, page.encryption_key
+                            )
+                            exporter.add_image(image_blob, page_index)
 
                 exporter.close()
 

@@ -100,6 +100,10 @@ class ExporterBase(metaclass=ABCMeta):
     def add_image(self, image_data: bytes, index: Union[int, range]):
         pass
 
+    @abstractmethod
+    def skip_image(self, index: Union[int, range]) -> bool:
+        pass
+
 
 class RawExporter(ExporterBase):
     def __init__(self, *args, **kwargs):
@@ -111,6 +115,10 @@ class RawExporter(ExporterBase):
         filename = Path(self.format_page_name(index))
         self.path.joinpath(filename).write_bytes(image_data)
 
+    def skip_image(self, index: Union[int, range]) -> bool:
+        filename = Path(self.format_page_name(index))
+        return self.path.joinpath(filename).exists()
+
 
 class CBZExporter(ExporterBase):
     def __init__(self, compression=zipfile.ZIP_DEFLATED, *args, **kwargs):
@@ -118,13 +126,22 @@ class CBZExporter(ExporterBase):
         self.path = Path(self.destination, self.title_name)
         self.path.mkdir(parents=True, exist_ok=True)
         self.path = self.path.joinpath(self.chapter_name).with_suffix(".cbz")
-        self.archive = zipfile.ZipFile(
-            self.path, mode="w", compression=compression
-        )
+        self.skip_all_image = self.path.exists()
+        if not self.skip_all_image:
+            self.archive = zipfile.ZipFile(
+                self.path, mode="w", compression=compression
+            )
 
     def add_image(self, image_data: bytes, index: Union[int, range]):
+        if self.skip_all_image:
+            return
         path = Path(self.chapter_name, self.format_page_name(index))
         self.archive.writestr(path.as_posix(), image_data)
 
+    def skip_image(self, index: Union[int, range]) -> bool:
+        return self.skip_all_image
+
     def close(self):
+        if self.skip_all_image:
+            return
         self.archive.close()
