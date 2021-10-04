@@ -126,22 +126,22 @@ class CBZExporter(ExporterBase):
         self.path = Path(self.destination, self.title_name)
         self.path.mkdir(parents=True, exist_ok=True)
         self.path = self.path.joinpath(self.chapter_name).with_suffix(".cbz")
-        self.skip_all_image = self.path.exists()
-        if not self.skip_all_image:
+        self.skip_all_images = self.path.exists()
+        if not self.skip_all_images:
             self.archive = zipfile.ZipFile(
                 self.path, mode="w", compression=compression
             )
 
     def add_image(self, image_data: bytes, index: Union[int, range]):
-        if self.skip_all_image:
+        if self.skip_all_images:
             return
         path = Path(self.chapter_name, self.format_page_name(index))
         self.archive.writestr(path.as_posix(), image_data)
 
     def skip_image(self, index: Union[int, range]) -> bool:
-        return self.skip_all_image
+        return self.skip_all_images
 
     def close(self):
-        if self.skip_all_image:
+        if self.skip_all_images:
             return
         self.archive.close()
