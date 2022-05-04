@@ -58,5 +58,7 @@ Options:
                                   [default: False]
   --chapter-title                 Include chapter titles in filenames
                                   [default: False]
+  --chapter-subdir                Save raw images in sub directory by chapter
+                                  [default: False]
   --help                          Show this message and exit.
 ```
