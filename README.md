@@ -36,7 +36,7 @@ Chapters can be saved as `CBZ` archives (default) or separate images by passing 
 
 Currently `mloader` supports these commands
 
-```bash
+```
 Usage: mloader [OPTIONS] [URLS]...
 
   Command-line tool to download manga from mangaplus
