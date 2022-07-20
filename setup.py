@@ -16,9 +16,6 @@ with open(
 with open("README.md", "r", "utf-8") as f:
     readme = f.read()
 
-with open("requirements.txt", "r", "utf-8") as f:
-    requires = f.readlines()
-
 
 setup(
     name=about["__title__"],
@@ -29,7 +26,11 @@ setup(
     url=about["__url__"],
     packages=find_packages(),
     python_requires=">=3.6",
-    install_requires=requires,
+    install_requires=[
+        "Click>=6.2",
+        "protobuf~=3.6",
+        "requests>=2"
+    ],
     license=about["__license__"],
     zip_safe=False,
     classifiers=[
@@ -39,6 +40,8 @@ setup(
         "Programming Language :: Python :: 3.6",
         "Programming Language :: Python :: 3.7",
         "Programming Language :: Python :: 3.8",
+        "Programming Language :: Python :: 3.9",
+        "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: Implementation :: CPython",
     ],
     project_urls={"Source": about["__url__"]},
