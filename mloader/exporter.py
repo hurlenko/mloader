@@ -3,6 +3,8 @@ from abc import ABCMeta, abstractmethod
 from itertools import chain
 from pathlib import Path
 from typing import Union, Optional
+from PIL import Image
+import io
 
 from mloader.constants import Language
 from mloader.response_pb2 import Title, Chapter
@@ -150,3 +152,23 @@ class CBZExporter(ExporterBase):
         if self.skip_all_images:
             return
         self.archive.close()
+
+class PDFExporter(ExporterBase):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.path = Path(self.destination, self.title_name)
+        self.path.mkdir(parents=True, exist_ok=True)
+        self.path = self.path.joinpath(self.chapter_name).with_suffix(".pdf")
+        self.skip_all_images = self.path.exists()
+
+    def add_image(self, image_data: bytes, index: Union[int, range]):
+        if self.skip_all_images:
+            return
+        img = Image.open(io.BytesIO(image_data))
+        try:
+            img.save(self.path, append=True)
+        except:
+            img.save(self.path)
+
+    def skip_image(self, index: Union[int, range]) -> bool:
+        return self.skip_all_images

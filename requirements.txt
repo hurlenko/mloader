@@ -1,3 +1,4 @@
 Click>=6.2
 protobuf~=3.6
 requests>=2
+Pillow>=9.2.0
