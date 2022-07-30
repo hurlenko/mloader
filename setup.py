@@ -30,7 +30,7 @@ setup(
         "Click>=6.2",
         "protobuf~=3.6",
         "requests>=2",
-        "Pillow>=9.2.0"
+        "Pillow>=9.2.0",
     ],
     license=about["__license__"],
     zip_safe=False,
