@@ -8,9 +8,9 @@
 
 ## 🚩 Table of Contents
 
-- [Installation](#-installation)
-- [Usage](#-usage)
-- [Command line interface](#%EF%B8%8F-command-line-interface)
+-   [Installation](#-installation)
+-   [Usage](#-usage)
+-   [Command line interface](#%EF%B8%8F-command-line-interface)
 
 ## 💾 Installation
 
@@ -32,6 +32,8 @@ You can download individual chapters or full title (but only available chapters)
 
 Chapters can be saved as `CBZ` archives (default) or separate images by passing the `--raw` parameter.
 
+There also is a pdf option that can be used by passing `--pdf`.
+
 ## 🖥️ Command line interface
 
 Currently `mloader` supports these commands
@@ -46,6 +48,7 @@ Options:
   -o, --out <directory>           Save directory (not a file)  [default:
                                   mloader_downloads]
   -r, --raw                       Save raw images  [default: False]
+  -p, --pdf                       Save as PDF file [default: False]
   -q, --quality [super_high|high|low]
                                   Image quality  [default: super_high]
   -s, --split                     Split combined images  [default: False]

@@ -7,7 +7,7 @@ from typing import Optional, Set
 import click
 
 from mloader import __version__ as about
-from mloader.exporter import RawExporter, CBZExporter
+from mloader.exporter import RawExporter, CBZExporter, PDFExporter
 from mloader.loader import MangaLoader
 
 log = logging.getLogger()
@@ -111,6 +111,15 @@ Examples:
     envvar="MLOADER_RAW",
 )
 @click.option(
+    "--pdf",
+    "-p",
+    is_flag=True,
+    default=False,
+    show_default=True,
+    help="Save as PDF",
+    envvar="MLOADER_PDF",
+)
+@click.option(
     "--quality",
     "-q",
     default="super_high",
@@ -180,6 +189,7 @@ Examples:
 def main(
     ctx: click.Context,
     out_dir: str,
+    pdf: bool,
     raw: bool,
     quality: str,
     split: bool,
@@ -197,7 +207,13 @@ def main(
     end = end or float("inf")
     log.info("Started export")
 
-    exporter = RawExporter if raw else CBZExporter
+    # I'd guess there is a more elegant solution
+    if raw:
+        exporter = RawExporter
+    elif pdf:
+        exporter = PDFExporter
+    else:
+        exporter = CBZExporter
     exporter = partial(
         exporter, destination=out_dir, add_chapter_title=chapter_title
     )
