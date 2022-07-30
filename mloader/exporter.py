@@ -80,7 +80,20 @@ class ExporterBase(metaclass=ABCMeta):
                 prefix = "c" if chapter_num < 1000 else "d"
 
         if chapter_num is None:
-            chapter_num = escape_path(chapter_name)
+            if '#' in chapter_name:
+                chapter_name = chapter_name.replace("#","")
+                if '-' in chapter_name:
+                    special_char = '-'
+                if ',' in chapter_name:
+                    special_char = ','
+                if '.' in chapter_name:
+                    special_char = '.'
+                # to simplify things suffix was not used
+                chapter_name_num = chapter_name.split(special_char)[0]
+                chapter_num = chapter_name.replace(special_char,"x")
+                prefix = "c" if len(chapter_name_num) < 4 else "d"
+            else:
+                chapter_num = escape_path(chapter_name)
 
         components.append(f"{prefix}{chapter_num:0>3}{suffix}")
         components.append("(web)")
