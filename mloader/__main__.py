@@ -7,7 +7,7 @@ from typing import Optional, Set
 import click
 
 from mloader import __version__ as about
-from mloader.exporter import RawExporter, CBZExporter, PDFExporter
+from mloader.exporter import CBZExporter, ExporterBase
 from mloader.loader import MangaLoader
 
 log = logging.getLogger()
@@ -102,22 +102,17 @@ Examples:
     envvar="MLOADER_EXTRACT_OUT_DIR",
 )
 @click.option(
-    "--raw",
-    "-r",
-    is_flag=True,
-    default=False,
+    "--format",
+    "-f",
+    "exporter",
+    type=click.Choice(
+        tuple(ExporterBase.FORMAT_REGISTRY), case_sensitive=False
+    ),
+    default=CBZExporter.format,
     show_default=True,
-    help="Save raw images",
-    envvar="MLOADER_RAW",
-)
-@click.option(
-    "--pdf",
-    "-p",
-    is_flag=True,
-    default=False,
-    show_default=True,
-    help="Save as PDF",
-    envvar="MLOADER_PDF",
+    help="Output format",
+    envvar="MLOADER_FORMAT",
+    callback=lambda _, __, value: ExporterBase.FORMAT_REGISTRY[value.lower()],
 )
 @click.option(
     "--quality",
@@ -189,8 +184,7 @@ Examples:
 def main(
     ctx: click.Context,
     out_dir: str,
-    pdf: bool,
-    raw: bool,
+    exporter: ExporterBase,
     quality: str,
     split: bool,
     begin: int,
@@ -207,13 +201,6 @@ def main(
     end = end or float("inf")
     log.info("Started export")
 
-    # I'd guess there is a more elegant solution
-    if raw:
-        exporter = RawExporter
-    elif pdf:
-        exporter = PDFExporter
-    else:
-        exporter = CBZExporter
     exporter = partial(
         exporter, destination=out_dir, add_chapter_title=chapter_title
     )
