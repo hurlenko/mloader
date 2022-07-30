@@ -164,6 +164,13 @@ message Title {
     int32 language = 7;
 }
 
+message ChapterListGroup {
+    repeated Chapter first_chapter_list = 2;
+    repeated Chapter mid_chapter_list = 3;
+    repeated Chapter last_chapter_list = 4;
+
+}
+
 message TitleDetailView {
     Title title = 1;
     string title_image_url = 2;
@@ -183,6 +190,7 @@ message TitleDetailView {
     int32 rating = 16;
     bool chapters_descending = 17;
     uint32 number_of_views = 18;
+    ChapterListGroup chapter_list_group = 28;
 }
 
 // SuccessResult

@@ -29,7 +29,7 @@ setup(
     install_requires=[
         "Click>=6.2",
         "protobuf~=3.6",
-        "requests>=2"
+        "requests>=2",
     ],
     license=about["__license__"],
     zip_safe=False,
