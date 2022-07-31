@@ -66,24 +66,48 @@ class ExporterBase(metaclass=ABCMeta):
         components.append("-")
         suffix = ""
         prefix = ""
+        extra = ""
         if self.is_oneshot:
             chapter_num = 0
         elif self.is_extra and next_chapter_name:
             suffix = "x1"
             chapter_num = chapter_name_to_int(next_chapter_name)
+            extra = " [Extra]"
             if chapter_num is not None:
                 chapter_num -= 1
                 prefix = "c" if chapter_num < 1000 else "d"
+            # fallback if the chapter we obtain number from is also an extra
+            else:
+                prefix = "c"
+                chapter_num = "0"
         else:
             chapter_num = chapter_name_to_int(chapter_name)
             if chapter_num is not None:
                 prefix = "c" if chapter_num < 1000 else "d"
 
         if chapter_num is None:
-            chapter_num = escape_path(chapter_name)
+            # part 2 that are called *.5 are unfixable
+            if "#" in chapter_name:
+                chapter_name = chapter_name.replace("#","")
+                if "-" in chapter_name:
+                    special_char = "-"
+                if "," in chapter_name:
+                    special_char = ","
+                if "." in chapter_name:
+                    special_char = "."
+                chapter_num = chapter_name.split(special_char)[0]
+                suffix = chapter_name.split(special_char)[1]
+                # removing leading zeros because of there being a chapter called '#000,001'
+                suffix = suffix.lstrip("0")
+                suffix = "x" + suffix if len(suffix) < 2 else "x" + suffix
+                prefix = "c" if len(chapter_num) < 4 else "d"
+                # could be more detailed if chosen to incl chapter subtitle in function parameters
+                extra = " [Part]"
+            else:
+                chapter_num = escape_path(chapter_name)
 
         components.append(f"{prefix}{chapter_num:0>3}{suffix}")
-        components.append("(web)")
+        components.append(f"(web){extra}")
         return " ".join(components)
 
     def _format_chapter_suffix(self) -> str:
