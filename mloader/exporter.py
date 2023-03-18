@@ -8,6 +8,8 @@ from mloader.constants import Language
 from mloader.response_pb2 import Title, Chapter
 from mloader.utils import escape_path, is_oneshot, chapter_name_to_int
 
+MAX_PREFIX_LENGTH = 45
+
 
 class ExporterBase(metaclass=ABCMeta):
     def __init__(
@@ -56,7 +58,10 @@ class ExporterBase(metaclass=ABCMeta):
         next_chapter_name: Optional[str] = None,
     ) -> str:
         # https://github.com/Daiz/manga-naming-scheme
-        components = [title_name]
+        if len(title_name) >= MAX_PREFIX_LENGTH and isinstance(self, RawExporter):
+            components = [title_name[0:MAX_PREFIX_LENGTH]]
+        else:
+            components = [title_name]
         if Language(language) != Language.eng:
             components.append(f"[{Language(language).name}]")
         components.append("-")
