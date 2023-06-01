@@ -141,6 +141,8 @@ class MangaLoader:
             chapter_num = len(chapters)
             for chapter_index, chapter_id in enumerate(sorted(chapters), 1):
                 viewer = self._load_pages(chapter_id)
+                if len(viewer.pages) == 0:
+                    continue
                 chapter = viewer.pages[-1].last_page.current_chapter
                 next_chapter = viewer.pages[-1].last_page.next_chapter
                 next_chapter = (
