@@ -9,6 +9,7 @@ class Language(Enum):
     por = 4
     rus = 5
     tha = 6
+    vie = 9
 
 
 class ChapterType(Enum):
