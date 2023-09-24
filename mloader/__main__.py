@@ -207,7 +207,10 @@ def main(
 
     exporter = RawExporter if raw else CBZExporter
     exporter = partial(
-        exporter, destination=out_dir, add_chapter_title=chapter_title, add_chapter_subdir=chapter_subdir
+        exporter,
+        destination=out_dir,
+        add_chapter_title=chapter_title,
+        add_chapter_subdir=chapter_subdir,
     )
 
     loader = MangaLoader(exporter, quality, split)
