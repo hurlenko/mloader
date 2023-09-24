@@ -1,5 +1,6 @@
 import re
 import string
+import sys
 from typing import Optional
 
 
@@ -20,3 +21,7 @@ def chapter_name_to_int(name: str) -> Optional[int]:
 
 def escape_path(path: str) -> str:
     return re.sub(r"[^\w]+", " ", path).strip(string.punctuation + " ")
+
+
+def is_windows() -> bool:
+    return sys.platform == "win32"

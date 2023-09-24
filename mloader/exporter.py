@@ -6,7 +6,7 @@ from typing import Union, Optional
 
 from mloader.constants import Language
 from mloader.response_pb2 import Title, Chapter
-from mloader.utils import escape_path, is_oneshot, chapter_name_to_int
+from mloader.utils import escape_path, is_oneshot, chapter_name_to_int, is_windows
 
 
 class ExporterBase(metaclass=ABCMeta):
@@ -20,6 +20,11 @@ class ExporterBase(metaclass=ABCMeta):
         add_chapter_subdir: bool = False
     ):
         self.destination = destination
+        
+        if is_windows():
+            destination = Path(self.destination).resolve().as_posix()
+            self.destination = f"\\\\?\\{destination}"
+
         self.add_chapter_title = add_chapter_title
         self.add_chapter_subdir = add_chapter_subdir
         self.title_name = escape_path(title.name).title()
