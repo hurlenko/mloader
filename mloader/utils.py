@@ -7,7 +7,7 @@ from typing import Optional
 def is_oneshot(chapter_name: str, chapter_subtitle: str) -> bool:
     chapter_number = chapter_name_to_int(chapter_name)
 
-    if chapter_number:
+    if chapter_number is not None:
         return False
 
     for name in (chapter_name, chapter_subtitle):
