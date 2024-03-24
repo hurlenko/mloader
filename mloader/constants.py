@@ -9,6 +9,7 @@ class Language(Enum):
     por = 4
     rus = 5
     tha = 6
+    deu = 7
     vie = 9
 
 
