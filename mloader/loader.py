@@ -66,7 +66,7 @@ class MangaLoader:
     @lru_cache(None)
     def _get_title_details(self, title_id: Union[str, int]) -> TitleDetailView:
         resp = self.session.get(
-            f"{self._api_url}/api/title_detail", params={"title_id": title_id}
+            f"{self._api_url}/api/title_detailV3", params={"title_id": title_id}
         )
         return Response.FromString(resp.content).success.title_detail_view
 
