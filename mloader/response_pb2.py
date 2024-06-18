@@ -18,7 +18,8 @@ DESCRIPTOR = _descriptor.FileDescriptor(
   package='manga',
   syntax='proto3',
   serialized_options=None,
-  serialized_pb=b'\n\x0eresponse.proto\x12\x05manga\"P\n\x06\x42\x61nner\x12\x11\n\timage_url\x18\x01 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\x17.manga.TransitionAction\x12\n\n\x02id\x18\x03 \x01(\r\"B\n\nBannerList\x12\x14\n\x0c\x62\x61nner_title\x18\x01 \x01(\t\x12\x1e\n\x07\x62\x61nners\x18\x02 \x03(\x0b\x32\r.manga.Banner\"/\n\x10TransitionAction\x12\x0e\n\x06method\x18\x01 \x01(\x05\x12\x0b\n\x03url\x18\x02 \x01(\t\"\xc9\x01\n\x07\x43hapter\x12\x10\n\x08title_id\x18\x01 \x01(\r\x12\x12\n\nchapter_id\x18\x02 \x01(\r\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x11\n\tsub_title\x18\x04 \x01(\t\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\x17\n\x0fstart_timestamp\x18\x06 \x01(\r\x12\x15\n\rend_timestamp\x18\x07 \x01(\r\x12\x16\n\x0e\x61lready_viewed\x18\x08 \x01(\x08\x12\x18\n\x10is_vertical_only\x18\t \x01(\x08\"\xaf\x01\n\x07\x43omment\x12\n\n\x02id\x18\x01 \x01(\r\x12\r\n\x05index\x18\x02 \x01(\r\x12\x11\n\tuser_name\x18\x03 \x01(\t\x12\x10\n\x08icon_url\x18\x04 \x01(\t\x12\x15\n\ris_my_comment\x18\x06 \x01(\x08\x12\x15\n\ralready_liked\x18\x07 \x01(\x08\x12\x17\n\x0fnumber_of_likes\x18\t \x01(\r\x12\x0c\n\x04\x62ody\x18\n \x01(\t\x12\x0f\n\x07\x63reated\x18\x0b \x01(\r\"\xfa\x03\n\rAdNetworkList\x12\x33\n\x0b\x61\x64_networks\x18\x01 \x01(\x0b\x32\x1e.manga.AdNetworkList.AdNetwork\x1a\xb3\x03\n\tAdNetwork\x12\x39\n\x08\x66\x61\x63\x65\x62ook\x18\x01 \x01(\x0b\x32\'.manga.AdNetworkList.AdNetwork.Facebook\x12\x33\n\x05\x61\x64mob\x18\x02 \x01(\x0b\x32$.manga.AdNetworkList.AdNetwork.Admob\x12\x33\n\x05mopub\x18\x03 \x01(\x0b\x32$.manga.AdNetworkList.AdNetwork.Mopub\x12\x37\n\x07\x61\x64sense\x18\x04 \x01(\x0b\x32&.manga.AdNetworkList.AdNetwork.Adsense\x12\x39\n\x08\x61pplovin\x18\x05 \x01(\x0b\x32\'.manga.AdNetworkList.AdNetwork.Applovin\x1a \n\x08\x46\x61\x63\x65\x62ook\x12\x14\n\x0cplacement_id\x18\x01 \x01(\t\x1a\x18\n\x05\x41\x64mob\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x18\n\x05Mopub\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x1a\n\x07\x41\x64sense\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x1b\n\x08\x41pplovin\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\"\xb8\x04\n\x05Popup\x12*\n\nos_default\x18\x01 \x01(\x0b\x32\x16.manga.Popup.OSDefault\x12,\n\x0b\x61pp_default\x18\x02 \x01(\x0b\x32\x17.manga.Popup.AppDefault\x12.\n\x0cmovie_reward\x18\x03 \x01(\x0b\x32\x18.manga.Popup.MovieReward\x1a?\n\x06\x42utton\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\x17.manga.TransitionAction\x1a\xab\x01\n\tOSDefault\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12&\n\tok_button\x18\x03 \x01(\x0b\x32\x13.manga.Popup.Button\x12+\n\x0eneutral_button\x18\x04 \x01(\x0b\x32\x13.manga.Popup.Button\x12*\n\rcancel_button\x18\x05 \x01(\x0b\x32\x13.manga.Popup.Button\x1ag\n\nAppDefault\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x03 \x01(\x0b\x32\x17.manga.TransitionAction\x12\x11\n\timage_url\x18\x04 \x01(\t\x1aM\n\x0bMovieReward\x12\x11\n\timage_url\x18\x01 \x01(\t\x12+\n\radvertisement\x18\x02 \x01(\x0b\x32\x14.manga.AdNetworkList\"\x95\x02\n\x08LastPage\x12\'\n\x0f\x63urrent_chapter\x18\x01 \x01(\x0b\x32\x0e.manga.Chapter\x12$\n\x0cnext_chapter\x18\x02 \x01(\x0b\x32\x0e.manga.Chapter\x12$\n\x0ctop_comments\x18\x03 \x03(\x0b\x32\x0e.manga.Comment\x12\x15\n\ris_subscribed\x18\x04 \x01(\x08\x12\x16\n\x0enext_timestamp\x18\x05 \x01(\r\x12\x14\n\x0c\x63hapter_type\x18\x06 \x01(\x05\x12+\n\radvertisement\x18\x07 \x01(\x0b\x32\x14.manga.AdNetworkList\x12\"\n\x0cmovie_reward\x18\x08 \x01(\x0b\x32\x0c.manga.Popup\"c\n\tMangaPage\x12\x11\n\timage_url\x18\x01 \x01(\t\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06height\x18\x03 \x01(\r\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x16\n\x0e\x65ncryption_key\x18\x05 \x01(\t\"\xa5\x01\n\x04Page\x12$\n\nmanga_page\x18\x01 \x01(\x0b\x32\x10.manga.MangaPage\x12&\n\x0b\x62\x61nner_list\x18\x02 \x01(\x0b\x32\x11.manga.BannerList\x12\"\n\tlast_page\x18\x03 \x01(\x0b\x32\x0f.manga.LastPage\x12+\n\radvertisement\x18\x04 \x01(\x0b\x32\x14.manga.AdNetworkList\" \n\x03Sns\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\"\x84\x02\n\x0bMangaViewer\x12\x1a\n\x05pages\x18\x01 \x03(\x0b\x32\x0b.manga.Page\x12\x12\n\nchapter_id\x18\x02 \x01(\r\x12 \n\x08\x63hapters\x18\x03 \x03(\x0b\x32\x0e.manga.Chapter\x12\x17\n\x03sns\x18\x04 \x01(\x0b\x32\n.manga.Sns\x12\x12\n\ntitle_name\x18\x05 \x01(\t\x12\x14\n\x0c\x63hapter_name\x18\x06 \x01(\t\x12\x1a\n\x12number_of_comments\x18\x07 \x01(\r\x12\x18\n\x10is_vertical_only\x18\x08 \x01(\x08\x12\x10\n\x08title_id\x18\t \x01(\r\x12\x18\n\x10start_from_right\x18\n \x01(\x08\"\x96\x01\n\x05Title\x12\x10\n\x08title_id\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x03 \x01(\t\x12\x1a\n\x12portrait_image_url\x18\x04 \x01(\t\x12\x1b\n\x13landscape_image_url\x18\x05 \x01(\t\x12\x12\n\nview_count\x18\x06 \x01(\r\x12\x10\n\x08language\x18\x07 \x01(\x05\"\x9d\x04\n\x0fTitleDetailView\x12\x1b\n\x05title\x18\x01 \x01(\x0b\x32\x0c.manga.Title\x12\x17\n\x0ftitle_image_url\x18\x02 \x01(\t\x12\x10\n\x08overview\x18\x03 \x01(\t\x12\x1c\n\x14\x62\x61\x63kground_image_url\x18\x04 \x01(\t\x12\x16\n\x0enext_timestamp\x18\x05 \x01(\r\x12\x15\n\rupdate_timing\x18\x06 \x01(\x05\x12\"\n\x1aviewing_period_description\x18\x07 \x01(\t\x12\x1b\n\x13non_appearance_info\x18\x08 \x01(\t\x12*\n\x12\x66irst_chapter_list\x18\t \x03(\x0b\x32\x0e.manga.Chapter\x12)\n\x11last_chapter_list\x18\n \x03(\x0b\x32\x0e.manga.Chapter\x12\x1e\n\x07\x62\x61nners\x18\x0b \x03(\x0b\x32\r.manga.Banner\x12,\n\x16recommended_title_list\x18\x0c \x03(\x0b\x32\x0c.manga.Title\x12\x17\n\x03sns\x18\r \x01(\x0b\x32\n.manga.Sns\x12\x19\n\x11is_simul_released\x18\x0e \x01(\x08\x12\x15\n\ris_subscribed\x18\x0f \x01(\x08\x12\x0e\n\x06rating\x18\x10 \x01(\x05\x12\x1b\n\x13\x63hapters_descending\x18\x11 \x01(\x08\x12\x17\n\x0fnumber_of_views\x18\x12 \x01(\r\"l\n\rSuccessResult\x12\x31\n\x11title_detail_view\x18\x08 \x01(\x0b\x32\x16.manga.TitleDetailView\x12(\n\x0cmanga_viewer\x18\n \x01(\x0b\x32\x12.manga.MangaViewer\"1\n\x08Response\x12%\n\x07success\x18\x01 \x01(\x0b\x32\x14.manga.SuccessResultb\x06proto3'
+  create_key=_descriptor._internal_create_key,
+  serialized_pb=b'\n\x0eresponse.proto\x12\x05manga\"P\n\x06\x42\x61nner\x12\x11\n\timage_url\x18\x01 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\x17.manga.TransitionAction\x12\n\n\x02id\x18\x03 \x01(\r\"B\n\nBannerList\x12\x14\n\x0c\x62\x61nner_title\x18\x01 \x01(\t\x12\x1e\n\x07\x62\x61nners\x18\x02 \x03(\x0b\x32\r.manga.Banner\"/\n\x10TransitionAction\x12\x0e\n\x06method\x18\x01 \x01(\x05\x12\x0b\n\x03url\x18\x02 \x01(\t\"\xc9\x01\n\x07\x43hapter\x12\x10\n\x08title_id\x18\x01 \x01(\r\x12\x12\n\nchapter_id\x18\x02 \x01(\r\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x11\n\tsub_title\x18\x04 \x01(\t\x12\x15\n\rthumbnail_url\x18\x05 \x01(\t\x12\x17\n\x0fstart_timestamp\x18\x06 \x01(\r\x12\x15\n\rend_timestamp\x18\x07 \x01(\r\x12\x16\n\x0e\x61lready_viewed\x18\x08 \x01(\x08\x12\x18\n\x10is_vertical_only\x18\t \x01(\x08\"\xa8\x01\n\x0c\x43hapterGroup\x12\x17\n\x0f\x63hapter_numbers\x18\x01 \x01(\t\x12*\n\x12\x66irst_chapter_list\x18\x02 \x03(\x0b\x32\x0e.manga.Chapter\x12(\n\x10mid_chapter_list\x18\x03 \x03(\x0b\x32\x0e.manga.Chapter\x12)\n\x11last_chapter_list\x18\x04 \x03(\x0b\x32\x0e.manga.Chapter\"\xaf\x01\n\x07\x43omment\x12\n\n\x02id\x18\x01 \x01(\r\x12\r\n\x05index\x18\x02 \x01(\r\x12\x11\n\tuser_name\x18\x03 \x01(\t\x12\x10\n\x08icon_url\x18\x04 \x01(\t\x12\x15\n\ris_my_comment\x18\x06 \x01(\x08\x12\x15\n\ralready_liked\x18\x07 \x01(\x08\x12\x17\n\x0fnumber_of_likes\x18\t \x01(\r\x12\x0c\n\x04\x62ody\x18\n \x01(\t\x12\x0f\n\x07\x63reated\x18\x0b \x01(\r\"\xfa\x03\n\rAdNetworkList\x12\x33\n\x0b\x61\x64_networks\x18\x01 \x01(\x0b\x32\x1e.manga.AdNetworkList.AdNetwork\x1a\xb3\x03\n\tAdNetwork\x12\x39\n\x08\x66\x61\x63\x65\x62ook\x18\x01 \x01(\x0b\x32\'.manga.AdNetworkList.AdNetwork.Facebook\x12\x33\n\x05\x61\x64mob\x18\x02 \x01(\x0b\x32$.manga.AdNetworkList.AdNetwork.Admob\x12\x33\n\x05mopub\x18\x03 \x01(\x0b\x32$.manga.AdNetworkList.AdNetwork.Mopub\x12\x37\n\x07\x61\x64sense\x18\x04 \x01(\x0b\x32&.manga.AdNetworkList.AdNetwork.Adsense\x12\x39\n\x08\x61pplovin\x18\x05 \x01(\x0b\x32\'.manga.AdNetworkList.AdNetwork.Applovin\x1a \n\x08\x46\x61\x63\x65\x62ook\x12\x14\n\x0cplacement_id\x18\x01 \x01(\t\x1a\x18\n\x05\x41\x64mob\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x18\n\x05Mopub\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x1a\n\x07\x41\x64sense\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\x1a\x1b\n\x08\x41pplovin\x12\x0f\n\x07unit_id\x18\x01 \x01(\t\"\xb8\x04\n\x05Popup\x12*\n\nos_default\x18\x01 \x01(\x0b\x32\x16.manga.Popup.OSDefault\x12,\n\x0b\x61pp_default\x18\x02 \x01(\x0b\x32\x17.manga.Popup.AppDefault\x12.\n\x0cmovie_reward\x18\x03 \x01(\x0b\x32\x18.manga.Popup.MovieReward\x1a?\n\x06\x42utton\x12\x0c\n\x04text\x18\x01 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x02 \x01(\x0b\x32\x17.manga.TransitionAction\x1a\xab\x01\n\tOSDefault\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12&\n\tok_button\x18\x03 \x01(\x0b\x32\x13.manga.Popup.Button\x12+\n\x0eneutral_button\x18\x04 \x01(\x0b\x32\x13.manga.Popup.Button\x12*\n\rcancel_button\x18\x05 \x01(\x0b\x32\x13.manga.Popup.Button\x1ag\n\nAppDefault\x12\x0f\n\x07subject\x18\x01 \x01(\t\x12\x0c\n\x04\x62ody\x18\x02 \x01(\t\x12\'\n\x06\x61\x63tion\x18\x03 \x01(\x0b\x32\x17.manga.TransitionAction\x12\x11\n\timage_url\x18\x04 \x01(\t\x1aM\n\x0bMovieReward\x12\x11\n\timage_url\x18\x01 \x01(\t\x12+\n\radvertisement\x18\x02 \x01(\x0b\x32\x14.manga.AdNetworkList\"\x95\x02\n\x08LastPage\x12\'\n\x0f\x63urrent_chapter\x18\x01 \x01(\x0b\x32\x0e.manga.Chapter\x12$\n\x0cnext_chapter\x18\x02 \x01(\x0b\x32\x0e.manga.Chapter\x12$\n\x0ctop_comments\x18\x03 \x03(\x0b\x32\x0e.manga.Comment\x12\x15\n\ris_subscribed\x18\x04 \x01(\x08\x12\x16\n\x0enext_timestamp\x18\x05 \x01(\r\x12\x14\n\x0c\x63hapter_type\x18\x06 \x01(\x05\x12+\n\radvertisement\x18\x07 \x01(\x0b\x32\x14.manga.AdNetworkList\x12\"\n\x0cmovie_reward\x18\x08 \x01(\x0b\x32\x0c.manga.Popup\"c\n\tMangaPage\x12\x11\n\timage_url\x18\x01 \x01(\t\x12\r\n\x05width\x18\x02 \x01(\r\x12\x0e\n\x06height\x18\x03 \x01(\r\x12\x0c\n\x04type\x18\x04 \x01(\x05\x12\x16\n\x0e\x65ncryption_key\x18\x05 \x01(\t\"\xa5\x01\n\x04Page\x12$\n\nmanga_page\x18\x01 \x01(\x0b\x32\x10.manga.MangaPage\x12&\n\x0b\x62\x61nner_list\x18\x02 \x01(\x0b\x32\x11.manga.BannerList\x12\"\n\tlast_page\x18\x03 \x01(\x0b\x32\x0f.manga.LastPage\x12+\n\radvertisement\x18\x04 \x01(\x0b\x32\x14.manga.AdNetworkList\" \n\x03Sns\x12\x0c\n\x04\x62ody\x18\x01 \x01(\t\x12\x0b\n\x03url\x18\x02 \x01(\t\"\x84\x02\n\x0bMangaViewer\x12\x1a\n\x05pages\x18\x01 \x03(\x0b\x32\x0b.manga.Page\x12\x12\n\nchapter_id\x18\x02 \x01(\r\x12 \n\x08\x63hapters\x18\x03 \x03(\x0b\x32\x0e.manga.Chapter\x12\x17\n\x03sns\x18\x04 \x01(\x0b\x32\n.manga.Sns\x12\x12\n\ntitle_name\x18\x05 \x01(\t\x12\x14\n\x0c\x63hapter_name\x18\x06 \x01(\t\x12\x1a\n\x12number_of_comments\x18\x07 \x01(\r\x12\x18\n\x10is_vertical_only\x18\x08 \x01(\x08\x12\x10\n\x08title_id\x18\t \x01(\r\x12\x18\n\x10start_from_right\x18\n \x01(\x08\"\x96\x01\n\x05Title\x12\x10\n\x08title_id\x18\x01 \x01(\r\x12\x0c\n\x04name\x18\x02 \x01(\t\x12\x0e\n\x06\x61uthor\x18\x03 \x01(\t\x12\x1a\n\x12portrait_image_url\x18\x04 \x01(\t\x12\x1b\n\x13landscape_image_url\x18\x05 \x01(\t\x12\x12\n\nview_count\x18\x06 \x01(\r\x12\x10\n\x08language\x18\x07 \x01(\x05\"\xce\x04\n\x0fTitleDetailView\x12\x1b\n\x05title\x18\x01 \x01(\x0b\x32\x0c.manga.Title\x12\x17\n\x0ftitle_image_url\x18\x02 \x01(\t\x12\x10\n\x08overview\x18\x03 \x01(\t\x12\x1c\n\x14\x62\x61\x63kground_image_url\x18\x04 \x01(\t\x12\x16\n\x0enext_timestamp\x18\x05 \x01(\r\x12\x15\n\rupdate_timing\x18\x06 \x01(\x05\x12\"\n\x1aviewing_period_description\x18\x07 \x01(\t\x12\x1b\n\x13non_appearance_info\x18\x08 \x01(\t\x12*\n\x12\x66irst_chapter_list\x18\t \x03(\x0b\x32\x0e.manga.Chapter\x12)\n\x11last_chapter_list\x18\n \x03(\x0b\x32\x0e.manga.Chapter\x12\x1e\n\x07\x62\x61nners\x18\x0b \x03(\x0b\x32\r.manga.Banner\x12,\n\x16recommended_title_list\x18\x0c \x03(\x0b\x32\x0c.manga.Title\x12\x17\n\x03sns\x18\r \x01(\x0b\x32\n.manga.Sns\x12\x19\n\x11is_simul_released\x18\x0e \x01(\x08\x12\x15\n\ris_subscribed\x18\x0f \x01(\x08\x12\x0e\n\x06rating\x18\x10 \x01(\x05\x12\x1b\n\x13\x63hapters_descending\x18\x11 \x01(\x08\x12\x17\n\x0fnumber_of_views\x18\x12 \x01(\r\x12/\n\x12\x63hapter_list_group\x18\x1c \x03(\x0b\x32\x13.manga.ChapterGroup\"l\n\rSuccessResult\x12\x31\n\x11title_detail_view\x18\x08 \x01(\x0b\x32\x16.manga.TitleDetailView\x12(\n\x0cmanga_viewer\x18\n \x01(\x0b\x32\x12.manga.MangaViewer\"1\n\x08Response\x12%\n\x07success\x18\x01 \x01(\x0b\x32\x14.manga.SuccessResultb\x06proto3'
 )
 
 
@@ -30,6 +31,7 @@ _BANNER = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='image_url', full_name='manga.Banner.image_url', index=0,
@@ -37,21 +39,21 @@ _BANNER = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='action', full_name='manga.Banner.action', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='id', full_name='manga.Banner.id', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -75,6 +77,7 @@ _BANNERLIST = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='banner_title', full_name='manga.BannerList.banner_title', index=0,
@@ -82,14 +85,14 @@ _BANNERLIST = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='banners', full_name='manga.BannerList.banners', index=1,
       number=2, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -113,6 +116,7 @@ _TRANSITIONACTION = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='method', full_name='manga.TransitionAction.method', index=0,
@@ -120,14 +124,14 @@ _TRANSITIONACTION = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='url', full_name='manga.TransitionAction.url', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -151,6 +155,7 @@ _CHAPTER = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='title_id', full_name='manga.Chapter.title_id', index=0,
@@ -158,63 +163,63 @@ _CHAPTER = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapter_id', full_name='manga.Chapter.chapter_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='name', full_name='manga.Chapter.name', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='sub_title', full_name='manga.Chapter.sub_title', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='thumbnail_url', full_name='manga.Chapter.thumbnail_url', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='start_timestamp', full_name='manga.Chapter.start_timestamp', index=5,
       number=6, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='end_timestamp', full_name='manga.Chapter.end_timestamp', index=6,
       number=7, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='already_viewed', full_name='manga.Chapter.already_viewed', index=7,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='is_vertical_only', full_name='manga.Chapter.is_vertical_only', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -232,76 +237,42 @@ _CHAPTER = _descriptor.Descriptor(
 )
 
 
-_COMMENT = _descriptor.Descriptor(
-  name='Comment',
-  full_name='manga.Comment',
+_CHAPTERGROUP = _descriptor.Descriptor(
+  name='ChapterGroup',
+  full_name='manga.ChapterGroup',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
-      name='id', full_name='manga.Comment.id', index=0,
-      number=1, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='index', full_name='manga.Comment.index', index=1,
-      number=2, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='user_name', full_name='manga.Comment.user_name', index=2,
-      number=3, type=9, cpp_type=9, label=1,
+      name='chapter_numbers', full_name='manga.ChapterGroup.chapter_numbers', index=0,
+      number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='icon_url', full_name='manga.Comment.icon_url', index=3,
-      number=4, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
+      name='first_chapter_list', full_name='manga.ChapterGroup.first_chapter_list', index=1,
+      number=2, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='is_my_comment', full_name='manga.Comment.is_my_comment', index=4,
-      number=6, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='mid_chapter_list', full_name='manga.ChapterGroup.mid_chapter_list', index=2,
+      number=3, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
-      name='already_liked', full_name='manga.Comment.already_liked', index=5,
-      number=7, type=8, cpp_type=7, label=1,
-      has_default_value=False, default_value=False,
+      name='last_chapter_list', full_name='manga.ChapterGroup.last_chapter_list', index=3,
+      number=4, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='number_of_likes', full_name='manga.Comment.number_of_likes', index=6,
-      number=9, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='body', full_name='manga.Comment.body', index=7,
-      number=10, type=9, cpp_type=9, label=1,
-      has_default_value=False, default_value=b"".decode('utf-8'),
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
-    _descriptor.FieldDescriptor(
-      name='created', full_name='manga.Comment.created', index=8,
-      number=11, type=13, cpp_type=3, label=1,
-      has_default_value=False, default_value=0,
-      message_type=None, enum_type=None, containing_type=None,
-      is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -315,7 +286,95 @@ _COMMENT = _descriptor.Descriptor(
   oneofs=[
   ],
   serialized_start=429,
-  serialized_end=604,
+  serialized_end=597,
+)
+
+
+_COMMENT = _descriptor.Descriptor(
+  name='Comment',
+  full_name='manga.Comment',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  create_key=_descriptor._internal_create_key,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='id', full_name='manga.Comment.id', index=0,
+      number=1, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='index', full_name='manga.Comment.index', index=1,
+      number=2, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='user_name', full_name='manga.Comment.user_name', index=2,
+      number=3, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='icon_url', full_name='manga.Comment.icon_url', index=3,
+      number=4, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='is_my_comment', full_name='manga.Comment.is_my_comment', index=4,
+      number=6, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='already_liked', full_name='manga.Comment.already_liked', index=5,
+      number=7, type=8, cpp_type=7, label=1,
+      has_default_value=False, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='number_of_likes', full_name='manga.Comment.number_of_likes', index=6,
+      number=9, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='body', full_name='manga.Comment.body', index=7,
+      number=10, type=9, cpp_type=9, label=1,
+      has_default_value=False, default_value=b"".decode('utf-8'),
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='created', full_name='manga.Comment.created', index=8,
+      number=11, type=13, cpp_type=3, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  serialized_options=None,
+  is_extendable=False,
+  syntax='proto3',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=600,
+  serialized_end=775,
 )
 
 
@@ -325,6 +384,7 @@ _ADNETWORKLIST_ADNETWORK_FACEBOOK = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='placement_id', full_name='manga.AdNetworkList.AdNetwork.Facebook.placement_id', index=0,
@@ -332,7 +392,7 @@ _ADNETWORKLIST_ADNETWORK_FACEBOOK = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -345,8 +405,8 @@ _ADNETWORKLIST_ADNETWORK_FACEBOOK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=972,
-  serialized_end=1004,
+  serialized_start=1143,
+  serialized_end=1175,
 )
 
 _ADNETWORKLIST_ADNETWORK_ADMOB = _descriptor.Descriptor(
@@ -355,6 +415,7 @@ _ADNETWORKLIST_ADNETWORK_ADMOB = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='unit_id', full_name='manga.AdNetworkList.AdNetwork.Admob.unit_id', index=0,
@@ -362,7 +423,7 @@ _ADNETWORKLIST_ADNETWORK_ADMOB = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -375,8 +436,8 @@ _ADNETWORKLIST_ADNETWORK_ADMOB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1006,
-  serialized_end=1030,
+  serialized_start=1177,
+  serialized_end=1201,
 )
 
 _ADNETWORKLIST_ADNETWORK_MOPUB = _descriptor.Descriptor(
@@ -385,6 +446,7 @@ _ADNETWORKLIST_ADNETWORK_MOPUB = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='unit_id', full_name='manga.AdNetworkList.AdNetwork.Mopub.unit_id', index=0,
@@ -392,7 +454,7 @@ _ADNETWORKLIST_ADNETWORK_MOPUB = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -405,8 +467,8 @@ _ADNETWORKLIST_ADNETWORK_MOPUB = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1032,
-  serialized_end=1056,
+  serialized_start=1203,
+  serialized_end=1227,
 )
 
 _ADNETWORKLIST_ADNETWORK_ADSENSE = _descriptor.Descriptor(
@@ -415,6 +477,7 @@ _ADNETWORKLIST_ADNETWORK_ADSENSE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='unit_id', full_name='manga.AdNetworkList.AdNetwork.Adsense.unit_id', index=0,
@@ -422,7 +485,7 @@ _ADNETWORKLIST_ADNETWORK_ADSENSE = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -435,8 +498,8 @@ _ADNETWORKLIST_ADNETWORK_ADSENSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1058,
-  serialized_end=1084,
+  serialized_start=1229,
+  serialized_end=1255,
 )
 
 _ADNETWORKLIST_ADNETWORK_APPLOVIN = _descriptor.Descriptor(
@@ -445,6 +508,7 @@ _ADNETWORKLIST_ADNETWORK_APPLOVIN = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='unit_id', full_name='manga.AdNetworkList.AdNetwork.Applovin.unit_id', index=0,
@@ -452,7 +516,7 @@ _ADNETWORKLIST_ADNETWORK_APPLOVIN = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -465,8 +529,8 @@ _ADNETWORKLIST_ADNETWORK_APPLOVIN = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1086,
-  serialized_end=1113,
+  serialized_start=1257,
+  serialized_end=1284,
 )
 
 _ADNETWORKLIST_ADNETWORK = _descriptor.Descriptor(
@@ -475,6 +539,7 @@ _ADNETWORKLIST_ADNETWORK = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='facebook', full_name='manga.AdNetworkList.AdNetwork.facebook', index=0,
@@ -482,35 +547,35 @@ _ADNETWORKLIST_ADNETWORK = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='admob', full_name='manga.AdNetworkList.AdNetwork.admob', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='mopub', full_name='manga.AdNetworkList.AdNetwork.mopub', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='adsense', full_name='manga.AdNetworkList.AdNetwork.adsense', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='applovin', full_name='manga.AdNetworkList.AdNetwork.applovin', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -523,8 +588,8 @@ _ADNETWORKLIST_ADNETWORK = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=678,
-  serialized_end=1113,
+  serialized_start=849,
+  serialized_end=1284,
 )
 
 _ADNETWORKLIST = _descriptor.Descriptor(
@@ -533,6 +598,7 @@ _ADNETWORKLIST = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='ad_networks', full_name='manga.AdNetworkList.ad_networks', index=0,
@@ -540,7 +606,7 @@ _ADNETWORKLIST = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -553,8 +619,8 @@ _ADNETWORKLIST = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=607,
-  serialized_end=1113,
+  serialized_start=778,
+  serialized_end=1284,
 )
 
 
@@ -564,6 +630,7 @@ _POPUP_BUTTON = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='text', full_name='manga.Popup.Button.text', index=0,
@@ -571,14 +638,14 @@ _POPUP_BUTTON = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='action', full_name='manga.Popup.Button.action', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -591,8 +658,8 @@ _POPUP_BUTTON = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1263,
-  serialized_end=1326,
+  serialized_start=1434,
+  serialized_end=1497,
 )
 
 _POPUP_OSDEFAULT = _descriptor.Descriptor(
@@ -601,6 +668,7 @@ _POPUP_OSDEFAULT = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='subject', full_name='manga.Popup.OSDefault.subject', index=0,
@@ -608,35 +676,35 @@ _POPUP_OSDEFAULT = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='body', full_name='manga.Popup.OSDefault.body', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='ok_button', full_name='manga.Popup.OSDefault.ok_button', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='neutral_button', full_name='manga.Popup.OSDefault.neutral_button', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='cancel_button', full_name='manga.Popup.OSDefault.cancel_button', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -649,8 +717,8 @@ _POPUP_OSDEFAULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1329,
-  serialized_end=1500,
+  serialized_start=1500,
+  serialized_end=1671,
 )
 
 _POPUP_APPDEFAULT = _descriptor.Descriptor(
@@ -659,6 +727,7 @@ _POPUP_APPDEFAULT = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='subject', full_name='manga.Popup.AppDefault.subject', index=0,
@@ -666,28 +735,28 @@ _POPUP_APPDEFAULT = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='body', full_name='manga.Popup.AppDefault.body', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='action', full_name='manga.Popup.AppDefault.action', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='image_url', full_name='manga.Popup.AppDefault.image_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -700,8 +769,8 @@ _POPUP_APPDEFAULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1502,
-  serialized_end=1605,
+  serialized_start=1673,
+  serialized_end=1776,
 )
 
 _POPUP_MOVIEREWARD = _descriptor.Descriptor(
@@ -710,6 +779,7 @@ _POPUP_MOVIEREWARD = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='image_url', full_name='manga.Popup.MovieReward.image_url', index=0,
@@ -717,14 +787,14 @@ _POPUP_MOVIEREWARD = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='advertisement', full_name='manga.Popup.MovieReward.advertisement', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -737,8 +807,8 @@ _POPUP_MOVIEREWARD = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1607,
-  serialized_end=1684,
+  serialized_start=1778,
+  serialized_end=1855,
 )
 
 _POPUP = _descriptor.Descriptor(
@@ -747,6 +817,7 @@ _POPUP = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='os_default', full_name='manga.Popup.os_default', index=0,
@@ -754,21 +825,21 @@ _POPUP = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='app_default', full_name='manga.Popup.app_default', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='movie_reward', full_name='manga.Popup.movie_reward', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -781,8 +852,8 @@ _POPUP = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1116,
-  serialized_end=1684,
+  serialized_start=1287,
+  serialized_end=1855,
 )
 
 
@@ -792,6 +863,7 @@ _LASTPAGE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='current_chapter', full_name='manga.LastPage.current_chapter', index=0,
@@ -799,56 +871,56 @@ _LASTPAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='next_chapter', full_name='manga.LastPage.next_chapter', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='top_comments', full_name='manga.LastPage.top_comments', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='is_subscribed', full_name='manga.LastPage.is_subscribed', index=3,
       number=4, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='next_timestamp', full_name='manga.LastPage.next_timestamp', index=4,
       number=5, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapter_type', full_name='manga.LastPage.chapter_type', index=5,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='advertisement', full_name='manga.LastPage.advertisement', index=6,
       number=7, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='movie_reward', full_name='manga.LastPage.movie_reward', index=7,
       number=8, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -861,8 +933,8 @@ _LASTPAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1687,
-  serialized_end=1964,
+  serialized_start=1858,
+  serialized_end=2135,
 )
 
 
@@ -872,6 +944,7 @@ _MANGAPAGE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='image_url', full_name='manga.MangaPage.image_url', index=0,
@@ -879,35 +952,35 @@ _MANGAPAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='width', full_name='manga.MangaPage.width', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='height', full_name='manga.MangaPage.height', index=2,
       number=3, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='type', full_name='manga.MangaPage.type', index=3,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='encryption_key', full_name='manga.MangaPage.encryption_key', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -920,8 +993,8 @@ _MANGAPAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1966,
-  serialized_end=2065,
+  serialized_start=2137,
+  serialized_end=2236,
 )
 
 
@@ -931,6 +1004,7 @@ _PAGE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='manga_page', full_name='manga.Page.manga_page', index=0,
@@ -938,28 +1012,28 @@ _PAGE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='banner_list', full_name='manga.Page.banner_list', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='last_page', full_name='manga.Page.last_page', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='advertisement', full_name='manga.Page.advertisement', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -972,8 +1046,8 @@ _PAGE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2068,
-  serialized_end=2233,
+  serialized_start=2239,
+  serialized_end=2404,
 )
 
 
@@ -983,6 +1057,7 @@ _SNS = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='body', full_name='manga.Sns.body', index=0,
@@ -990,14 +1065,14 @@ _SNS = _descriptor.Descriptor(
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='url', full_name='manga.Sns.url', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1010,8 +1085,8 @@ _SNS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2235,
-  serialized_end=2267,
+  serialized_start=2406,
+  serialized_end=2438,
 )
 
 
@@ -1021,6 +1096,7 @@ _MANGAVIEWER = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='pages', full_name='manga.MangaViewer.pages', index=0,
@@ -1028,70 +1104,70 @@ _MANGAVIEWER = _descriptor.Descriptor(
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapter_id', full_name='manga.MangaViewer.chapter_id', index=1,
       number=2, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapters', full_name='manga.MangaViewer.chapters', index=2,
       number=3, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='sns', full_name='manga.MangaViewer.sns', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='title_name', full_name='manga.MangaViewer.title_name', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapter_name', full_name='manga.MangaViewer.chapter_name', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='number_of_comments', full_name='manga.MangaViewer.number_of_comments', index=6,
       number=7, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='is_vertical_only', full_name='manga.MangaViewer.is_vertical_only', index=7,
       number=8, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='title_id', full_name='manga.MangaViewer.title_id', index=8,
       number=9, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='start_from_right', full_name='manga.MangaViewer.start_from_right', index=9,
       number=10, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1104,8 +1180,8 @@ _MANGAVIEWER = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2270,
-  serialized_end=2530,
+  serialized_start=2441,
+  serialized_end=2701,
 )
 
 
@@ -1115,6 +1191,7 @@ _TITLE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='title_id', full_name='manga.Title.title_id', index=0,
@@ -1122,49 +1199,49 @@ _TITLE = _descriptor.Descriptor(
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='name', full_name='manga.Title.name', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='author', full_name='manga.Title.author', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='portrait_image_url', full_name='manga.Title.portrait_image_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='landscape_image_url', full_name='manga.Title.landscape_image_url', index=4,
       number=5, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='view_count', full_name='manga.Title.view_count', index=5,
       number=6, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='language', full_name='manga.Title.language', index=6,
       number=7, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1177,8 +1254,8 @@ _TITLE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2533,
-  serialized_end=2683,
+  serialized_start=2704,
+  serialized_end=2854,
 )
 
 
@@ -1188,6 +1265,7 @@ _TITLEDETAILVIEW = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='title', full_name='manga.TitleDetailView.title', index=0,
@@ -1195,126 +1273,133 @@ _TITLEDETAILVIEW = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='title_image_url', full_name='manga.TitleDetailView.title_image_url', index=1,
       number=2, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='overview', full_name='manga.TitleDetailView.overview', index=2,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='background_image_url', full_name='manga.TitleDetailView.background_image_url', index=3,
       number=4, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='next_timestamp', full_name='manga.TitleDetailView.next_timestamp', index=4,
       number=5, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='update_timing', full_name='manga.TitleDetailView.update_timing', index=5,
       number=6, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='viewing_period_description', full_name='manga.TitleDetailView.viewing_period_description', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='non_appearance_info', full_name='manga.TitleDetailView.non_appearance_info', index=7,
       number=8, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=b"".decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='first_chapter_list', full_name='manga.TitleDetailView.first_chapter_list', index=8,
       number=9, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='last_chapter_list', full_name='manga.TitleDetailView.last_chapter_list', index=9,
       number=10, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='banners', full_name='manga.TitleDetailView.banners', index=10,
       number=11, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='recommended_title_list', full_name='manga.TitleDetailView.recommended_title_list', index=11,
       number=12, type=11, cpp_type=10, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='sns', full_name='manga.TitleDetailView.sns', index=12,
       number=13, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='is_simul_released', full_name='manga.TitleDetailView.is_simul_released', index=13,
       number=14, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='is_subscribed', full_name='manga.TitleDetailView.is_subscribed', index=14,
       number=15, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='rating', full_name='manga.TitleDetailView.rating', index=15,
       number=16, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='chapters_descending', full_name='manga.TitleDetailView.chapters_descending', index=16,
       number=17, type=8, cpp_type=7, label=1,
       has_default_value=False, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='number_of_views', full_name='manga.TitleDetailView.number_of_views', index=17,
       number=18, type=13, cpp_type=3, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
+    _descriptor.FieldDescriptor(
+      name='chapter_list_group', full_name='manga.TitleDetailView.chapter_list_group', index=18,
+      number=28, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1327,8 +1412,8 @@ _TITLEDETAILVIEW = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=2686,
-  serialized_end=3227,
+  serialized_start=2857,
+  serialized_end=3447,
 )
 
 
@@ -1338,6 +1423,7 @@ _SUCCESSRESULT = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='title_detail_view', full_name='manga.SuccessResult.title_detail_view', index=0,
@@ -1345,14 +1431,14 @@ _SUCCESSRESULT = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
     _descriptor.FieldDescriptor(
       name='manga_viewer', full_name='manga.SuccessResult.manga_viewer', index=1,
       number=10, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1365,8 +1451,8 @@ _SUCCESSRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3229,
-  serialized_end=3337,
+  serialized_start=3449,
+  serialized_end=3557,
 )
 
 
@@ -1376,6 +1462,7 @@ _RESPONSE = _descriptor.Descriptor(
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
+  create_key=_descriptor._internal_create_key,
   fields=[
     _descriptor.FieldDescriptor(
       name='success', full_name='manga.Response.success', index=0,
@@ -1383,7 +1470,7 @@ _RESPONSE = _descriptor.Descriptor(
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      serialized_options=None, file=DESCRIPTOR),
+      serialized_options=None, file=DESCRIPTOR,  create_key=_descriptor._internal_create_key),
   ],
   extensions=[
   ],
@@ -1396,12 +1483,15 @@ _RESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=3339,
-  serialized_end=3388,
+  serialized_start=3559,
+  serialized_end=3608,
 )
 
 _BANNER.fields_by_name['action'].message_type = _TRANSITIONACTION
 _BANNERLIST.fields_by_name['banners'].message_type = _BANNER
+_CHAPTERGROUP.fields_by_name['first_chapter_list'].message_type = _CHAPTER
+_CHAPTERGROUP.fields_by_name['mid_chapter_list'].message_type = _CHAPTER
+_CHAPTERGROUP.fields_by_name['last_chapter_list'].message_type = _CHAPTER
 _ADNETWORKLIST_ADNETWORK_FACEBOOK.containing_type = _ADNETWORKLIST_ADNETWORK
 _ADNETWORKLIST_ADNETWORK_ADMOB.containing_type = _ADNETWORKLIST_ADNETWORK
 _ADNETWORKLIST_ADNETWORK_MOPUB.containing_type = _ADNETWORKLIST_ADNETWORK
@@ -1445,6 +1535,7 @@ _TITLEDETAILVIEW.fields_by_name['last_chapter_list'].message_type = _CHAPTER
 _TITLEDETAILVIEW.fields_by_name['banners'].message_type = _BANNER
 _TITLEDETAILVIEW.fields_by_name['recommended_title_list'].message_type = _TITLE
 _TITLEDETAILVIEW.fields_by_name['sns'].message_type = _SNS
+_TITLEDETAILVIEW.fields_by_name['chapter_list_group'].message_type = _CHAPTERGROUP
 _SUCCESSRESULT.fields_by_name['title_detail_view'].message_type = _TITLEDETAILVIEW
 _SUCCESSRESULT.fields_by_name['manga_viewer'].message_type = _MANGAVIEWER
 _RESPONSE.fields_by_name['success'].message_type = _SUCCESSRESULT
@@ -1452,6 +1543,7 @@ DESCRIPTOR.message_types_by_name['Banner'] = _BANNER
 DESCRIPTOR.message_types_by_name['BannerList'] = _BANNERLIST
 DESCRIPTOR.message_types_by_name['TransitionAction'] = _TRANSITIONACTION
 DESCRIPTOR.message_types_by_name['Chapter'] = _CHAPTER
+DESCRIPTOR.message_types_by_name['ChapterGroup'] = _CHAPTERGROUP
 DESCRIPTOR.message_types_by_name['Comment'] = _COMMENT
 DESCRIPTOR.message_types_by_name['AdNetworkList'] = _ADNETWORKLIST
 DESCRIPTOR.message_types_by_name['Popup'] = _POPUP
@@ -1493,6 +1585,13 @@ Chapter = _reflection.GeneratedProtocolMessageType('Chapter', (_message.Message,
   # @@protoc_insertion_point(class_scope:manga.Chapter)
   })
 _sym_db.RegisterMessage(Chapter)
+
+ChapterGroup = _reflection.GeneratedProtocolMessageType('ChapterGroup', (_message.Message,), {
+  'DESCRIPTOR' : _CHAPTERGROUP,
+  '__module__' : 'response_pb2'
+  # @@protoc_insertion_point(class_scope:manga.ChapterGroup)
+  })
+_sym_db.RegisterMessage(ChapterGroup)
 
 Comment = _reflection.GeneratedProtocolMessageType('Comment', (_message.Message,), {
   'DESCRIPTOR' : _COMMENT,

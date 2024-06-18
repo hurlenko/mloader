@@ -18,7 +18,6 @@ message TransitionAction {
     string url = 2;
 }
 
-// LastPage
 message Chapter {
     uint32 title_id = 1;
     uint32 chapter_id = 2;
@@ -31,6 +30,12 @@ message Chapter {
     bool is_vertical_only = 9;
 }
 
+message ChapterGroup {
+    string chapter_numbers = 1;
+    repeated Chapter first_chapter_list = 2;
+    repeated Chapter mid_chapter_list = 3;
+    repeated Chapter last_chapter_list = 4;
+}
 
 message Comment {
     uint32 id = 1;
@@ -183,15 +188,14 @@ message TitleDetailView {
     int32 rating = 16;
     bool chapters_descending = 17;
     uint32 number_of_views = 18;
+    repeated ChapterGroup chapter_list_group = 28;
 }
 
-// SuccessResult
 message SuccessResult {
     TitleDetailView title_detail_view = 8;
     MangaViewer manga_viewer = 10;
 }
 
-//Response
 message Response {
     SuccessResult success = 1;
 }

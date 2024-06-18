@@ -66,7 +66,7 @@ class MangaLoader:
     @lru_cache(None)
     def _get_title_details(self, title_id: Union[str, int]) -> TitleDetailView:
         resp = self.session.get(
-            f"{self._api_url}/api/title_detail", params={"title_id": title_id}
+            f"{self._api_url}/api/title_detailV3", params={"title_id": title_id}
         )
         return Response.FromString(resp.content).success.title_detail_view
 
@@ -106,8 +106,10 @@ class MangaLoader:
             details = self._get_title_details(tid)
             mangas[tid] = [
                 chapter_meta(chapter.chapter_id, chapter.name)
-                for chapter in chain(
-                    details.first_chapter_list, details.last_chapter_list
+                # Skipping mid_chapter_list, since it contains unavailable chapters
+                for chapter in chain.from_iterable(
+                    chain(group.first_chapter_list, group.last_chapter_list)
+                    for group in details.chapter_list_group
                 )
             ]
 
